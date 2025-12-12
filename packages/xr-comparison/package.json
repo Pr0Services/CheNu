@@ -1,0 +1,9 @@
+{
+  "name": "@chenu/xr-comparison-routing",
+  "version": "1.4.0",
+  "description": "CHE·NU XR Replay Comparison + AI Routing - Observation Only",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": { "react": ">=17.0.0" },
+  "license": "MIT"
+}

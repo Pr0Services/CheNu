@@ -1,0 +1,13 @@
+{
+  "name": "@chenu/orchestrator",
+  "version": "1.0.0",
+  "description": "CHE·NU LLM Orchestrator with ULTRA PACK",
+  "type": "module",
+  "main": "router/LLMRouter.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "openai": "^4.28.0"
+  }
+}

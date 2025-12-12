@@ -1,0 +1,287 @@
+// CHE·NU CHE-NU - Prisma Schema
+// Database: PostgreSQL
+// Version: ULTRA_PACK-1.0
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// CORE ENTITIES
+// ============================================================
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  avatar_config Json?
+  preferences   Json?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  
+  // Relations
+  tasks         Task[]
+  decisions     Decision[]
+  threads       Thread[]
+  executions    Execution[]
+  persona_states PersonaState[]
+  
+  @@map("users")
+}
+
+model Sphere {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  color       String?
+  icon        String?
+  order_index Int      @default(0)
+  is_active   Boolean  @default(true)
+  config      Json?
+  created_at  DateTime @default(now())
+  
+  // Relations
+  items       Item[]
+  tasks       Task[]
+  threads     Thread[]
+  xr_spaces   XRSpace[]
+  
+  @@map("spheres")
+}
+
+model Item {
+  id          String   @id @default(uuid())
+  sphere_id   String
+  title       String
+  description String?
+  type        String
+  status      String   @default("active")
+  metadata    Json?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  sphere      Sphere   @relation(fields: [sphere_id], references: [id])
+  
+  @@map("items")
+}
+
+// ============================================================
+// TASK & DECISION SYSTEM
+// ============================================================
+
+model Task {
+  id          String   @id @default(uuid())
+  user_id     String
+  sphere_id   String?
+  title       String
+  description String?
+  type        String   // workflow, timeline, simulation, xr, tone, etc.
+  status      String   @default("pending")
+  priority    String   @default("medium")
+  input       Json?
+  output      Json?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  user        User     @relation(fields: [user_id], references: [id])
+  sphere      Sphere?  @relation(fields: [sphere_id], references: [id])
+  executions  Execution[]
+  
+  @@map("tasks")
+}
+
+model Decision {
+  id          String   @id @default(uuid())
+  user_id     String
+  thread_id   String?
+  title       String
+  description String?
+  options     Json?    // Decision branches
+  selected    String?  // Selected option
+  rationale   String?
+  status      String   @default("pending")
+  created_at  DateTime @default(now())
+  decided_at  DateTime?
+  
+  // Relations
+  user        User     @relation(fields: [user_id], references: [id])
+  thread      Thread?  @relation(fields: [thread_id], references: [id])
+  
+  @@map("decisions")
+}
+
+// ============================================================
+// KNOWLEDGE THREADS
+// ============================================================
+
+model Thread {
+  id          String   @id @default(uuid())
+  user_id     String
+  sphere_id   String?
+  type        String   // PKT, CKT, ISKT
+  title       String
+  content     Json?
+  status      String   @default("active")
+  visibility  String   @default("private")
+  hash_chain  String?  // For integrity
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  user        User      @relation(fields: [user_id], references: [id])
+  sphere      Sphere?   @relation(fields: [sphere_id], references: [id])
+  events      Event[]
+  decisions   Decision[]
+  
+  @@map("threads")
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  thread_id   String
+  type        String
+  title       String
+  content     Json?
+  timestamp   DateTime @default(now())
+  
+  // Relations
+  thread      Thread   @relation(fields: [thread_id], references: [id])
+  
+  @@map("events")
+}
+
+// ============================================================
+// AGENT SYSTEM
+// ============================================================
+
+model Agent {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  role        String
+  description String?
+  config      Json?
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  
+  // Relations
+  executions  Execution[]
+  
+  @@map("agents")
+}
+
+model Execution {
+  id           String   @id @default(uuid())
+  task_id      String?
+  agent_id     String
+  user_id      String?
+  input        Json?
+  output       Json?
+  pipeline     Json?    // CHE·NU Output Protocol
+  status       String   @default("completed")
+  duration_ms  Int?
+  created_at   DateTime @default(now())
+  
+  // Relations
+  task         Task?    @relation(fields: [task_id], references: [id])
+  agent        Agent    @relation(fields: [agent_id], references: [id])
+  user         User?    @relation(fields: [user_id], references: [id])
+  
+  @@map("executions")
+}
+
+// ============================================================
+// XR & PERSONA SYSTEM
+// ============================================================
+
+model XRSpace {
+  id          String   @id @default(uuid())
+  sphere_id   String?
+  name        String
+  type        String   // decision_chamber, collaboration_sphere, etc.
+  config      Json?
+  capacity    Int      @default(10)
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  
+  // Relations
+  sphere      Sphere?  @relation(fields: [sphere_id], references: [id])
+  sessions    XRSession[]
+  
+  @@map("xr_spaces")
+}
+
+model XRSession {
+  id          String   @id @default(uuid())
+  space_id    String
+  title       String?
+  status      String   @default("active")
+  participants Json?
+  recording   Json?
+  started_at  DateTime @default(now())
+  ended_at    DateTime?
+  
+  // Relations
+  space       XRSpace  @relation(fields: [space_id], references: [id])
+  
+  @@map("xr_sessions")
+}
+
+model PersonaState {
+  id          String   @id @default(uuid())
+  user_id     String
+  geometry    String   @default("sphere")
+  color       String   @default("#667eea")
+  aura_config Json?
+  position    Json?
+  animation   String   @default("idle")
+  is_canonical Boolean @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  user        User     @relation(fields: [user_id], references: [id])
+  
+  @@map("persona_states")
+}
+
+// ============================================================
+// SIMULATION (CSF)
+// ============================================================
+
+model Simulation {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  scenario    Json?
+  branches    Json?
+  type        String   @default("conceptual")
+  status      String   @default("completed")
+  created_at  DateTime @default(now())
+  
+  @@map("simulations")
+}
+
+// ============================================================
+// AUDIT & LOGS
+// ============================================================
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  entity_type String
+  entity_id   String
+  action      String
+  actor_id    String?
+  changes     Json?
+  timestamp   DateTime @default(now())
+  
+  @@index([entity_type, entity_id])
+  @@map("audit_logs")
+}

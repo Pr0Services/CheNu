@@ -1,0 +1,69 @@
+{
+  "id": "scholar",
+  "name": "Scholar",
+  "type": "scholar",
+  
+  "visual": {
+    "baseShape": "structure",
+    "color": {
+      "primary": "#5D3A6E",
+      "secondary": "#7B4A8E",
+      "accent": "#9C6FB8",
+      "gradient": ["#5D3A6E", "#7B4A8E"]
+    },
+    "growthAxis": "vertical",
+    "icon": "🎓",
+    "glow": {
+      "enabled": true,
+      "intensity": 0.3,
+      "color": "#9C6FB8"
+    }
+  },
+  
+  "layout": {
+    "defaultDimension": "M",
+    "minDimension": "S",
+    "maxDimension": "XL",
+    "childArrangement": "hierarchical",
+    "expansionDirection": "down"
+  },
+  
+  "priority": ["research", "knowledge", "citations", "experiments"],
+  
+  "permissions": {
+    "default": ["read"],
+    "researcher": ["read", "write", "cite"],
+    "reviewer": ["read", "comment", "approve"],
+    "admin": ["read", "write", "delete", "publish"]
+  },
+  
+  "content": {
+    "sections": [
+      { "id": "research", "label": "Research", "icon": "🔬", "order": 1 },
+      { "id": "knowledge", "label": "Knowledge Base", "icon": "📖", "order": 2 },
+      { "id": "patents", "label": "Patents", "icon": "📜", "order": 3 },
+      { "id": "data", "label": "Data", "icon": "📊", "order": 4 }
+    ],
+    "defaultView": "research"
+  },
+  
+  "agents": {
+    "roles": ["research-ai", "patent-analyst", "lit-review", "data-scientist", "tech-writer"],
+    "maxVisible": 5,
+    "arrangement": "hierarchical"
+  },
+  
+  "behavior": {
+    "onFocus": { "scale": 1.08, "showDetails": true },
+    "onEnter": { "transition": "slide-down", "duration": 350 },
+    "onIdle": { "animation": "none", "dimAfter": 60000 },
+    "onActive": { "animation": "glow", "highlight": true }
+  },
+  
+  "rules": {
+    "sizeByContent": true,
+    "motionByActivity": false,
+    "visibilityByPermission": true,
+    "requireCitations": true
+  }
+}

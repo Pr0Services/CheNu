@@ -1,0 +1,368 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# ROADY V20 - Kubernetes Deployment
+# ═══════════════════════════════════════════════════════════════════════════════
+
+---
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: roady
+  labels:
+    app: roady
+
+---
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roady-config
+  namespace: roady
+data:
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "info"
+  API_BASE_URL: "https://api.roady.app"
+  REDIS_HOST: "redis-master"
+  REDIS_PORT: "6379"
+
+---
+# Secrets (reference - actual values from sealed-secrets or external)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: roady-secrets
+  namespace: roady
+type: Opaque
+stringData:
+  DATABASE_URL: "postgresql://roady:CHANGE_ME@postgres:5432/roady"
+  JWT_SECRET: "CHANGE_ME_SUPER_SECRET_KEY"
+  OPENAI_API_KEY: "sk-..."
+  ANTHROPIC_API_KEY: "sk-ant-..."
+
+---
+# Frontend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roady-frontend
+  namespace: roady
+  labels:
+    app: roady
+    component: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roady
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: roady
+        component: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/roady/frontend:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+---
+# Frontend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: roady-frontend
+  namespace: roady
+spec:
+  selector:
+    app: roady
+    component: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
+
+---
+# Backend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roady-backend
+  namespace: roady
+  labels:
+    app: roady
+    component: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roady
+      component: backend
+  template:
+    metadata:
+      labels:
+        app: roady
+        component: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/roady/backend:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: roady-config
+            - secretRef:
+                name: roady-secrets
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+---
+# Backend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: roady-backend
+  namespace: roady
+spec:
+  selector:
+    app: roady
+    component: backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP
+
+---
+# Worker Deployment (Celery)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roady-worker
+  namespace: roady
+  labels:
+    app: roady
+    component: worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: roady
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: roady
+        component: worker
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/roady/backend:latest
+          command: ["celery", "-A", "worker", "worker", "--loglevel=info"]
+          envFrom:
+            - configMapRef:
+                name: roady-config
+            - secretRef:
+                name: roady-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+
+---
+# Ingress (nginx-ingress)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: roady-ingress
+  namespace: roady
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+spec:
+  tls:
+    - hosts:
+        - roady.app
+        - api.roady.app
+      secretName: roady-tls
+  rules:
+    - host: roady.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: roady-frontend
+                port:
+                  number: 80
+    - host: api.roady.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: roady-backend
+                port:
+                  number: 8000
+
+---
+# HorizontalPodAutoscaler - Frontend
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: roady-frontend-hpa
+  namespace: roady
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: roady-frontend
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+
+---
+# HorizontalPodAutoscaler - Backend
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: roady-backend-hpa
+  namespace: roady
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: roady-backend
+  minReplicas: 2
+  maxReplicas: 20
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+
+---
+# PodDisruptionBudget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: roady-backend-pdb
+  namespace: roady
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: roady
+      component: backend
+
+---
+# NetworkPolicy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: roady-network-policy
+  namespace: roady
+spec:
+  podSelector:
+    matchLabels:
+      app: roady
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 80
+        - protocol: TCP
+          port: 8000
+  egress:
+    - to:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 5432  # PostgreSQL
+        - protocol: TCP
+          port: 6379  # Redis
+        - protocol: TCP
+          port: 443   # External HTTPS
+
+---
+# ServiceMonitor (for Prometheus)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: roady-monitor
+  namespace: roady
+  labels:
+    app: roady
+spec:
+  selector:
+    matchLabels:
+      app: roady
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

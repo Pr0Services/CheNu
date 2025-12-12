@@ -1,0 +1,370 @@
+# CHE·NU UI KIT — Figma Component Library
+# Version: 1.0-canonical
+# Note: Colors/Typography référencent VISUAL_STYLE_PACK
+
+# ============================================================
+# FIGMA FILE STRUCTURE
+# ============================================================
+pages:
+  - 00_Overview
+  - 01_Foundations
+  - 02_Components
+  - 03_Layouts
+  - 04_Spheres
+  - 05_Agents
+  - 06_Universe_View
+  - 07_Threads
+  - 08_XR_Surfaces
+  - 09_Prototypes
+
+# ============================================================
+# FOUNDATIONS (Design Tokens)
+# ============================================================
+foundations:
+  grids:
+    desktop:
+      columns: 12
+      margin: 24
+      gutter: 16
+      max_width: 1440
+    tablet:
+      columns: 8
+      margin: 20
+      gutter: 14
+    mobile:
+      columns: 4
+      margin: 16
+      gutter: 12
+      max_width: 480
+
+  spacing:
+    xs: 4
+    sm: 8
+    md: 16
+    lg: 24
+    xl: 32
+    xxl: 48
+
+  radius:
+    sm: 6
+    md: 10
+    lg: 16
+    full: 9999
+
+  elevation:
+    none: "none"
+    low: "0 1px 4px rgba(0,0,0,0.25)"
+    medium: "0 4px 12px rgba(0,0,0,0.35)"
+    high: "0 8px 22px rgba(0,0,0,0.45)"
+    glow: "0 0 20px rgba(91,169,255,0.4)"
+
+# ============================================================
+# COMPONENT LIBRARY
+# ============================================================
+components:
+
+  # --- BUTTONS ---
+  Button:
+    variants:
+      type: [primary, secondary, ghost, danger]
+      size: [sm, md, lg]
+      state: [default, hover, pressed, disabled, loading]
+    specs:
+      sm: { height: 32, padding: "6 12", font: 13 }
+      md: { height: 40, padding: "8 16", font: 15 }
+      lg: { height: 48, padding: "12 24", font: 16 }
+    icon_support: [left, right, only]
+
+  # --- INPUTS ---
+  Input:
+    variants:
+      type: [text, search, password, textarea]
+      state: [default, focus, error, disabled]
+      size: [sm, md, lg]
+    specs:
+      label_spacing: 4
+      error_color: "#FF5A5A"
+      focus_ring: "0 0 0 2px rgba(91,169,255,0.4)"
+
+  # --- CARDS ---
+  Card:
+    variants:
+      elevation: [none, low, medium]
+      sphere: [none, ...11_spheres]
+    specs:
+      padding: 16
+      radius: 16
+      border: "1px solid rgba(255,255,255,0.05)"
+    sphere_accent:
+      border_left: "3px solid sphere_color"
+      header_tint: "sphere_color @ 8%"
+
+  # --- PANELS ---
+  Panel:
+    types:
+      Side: { width: 360, position: right }
+      Floating: { max_width: 480, centered: true }
+      Modal: { overlay: "rgba(0,0,0,0.6)", max_width: 560 }
+      Nova: { width: 420, sections: [input, interpretation, plan, branches] }
+      Architect: { width: 480, sections: [tree, workflow, conflicts] }
+    common:
+      radius: 16
+      padding: 24
+      elevation: high
+
+  # --- LISTS ---
+  ListItem:
+    variants:
+      type: [task, note, document, memory, contact]
+      status: [default, active, completed, archived]
+    specs:
+      height: 56
+      padding: "12 16"
+      hover_bg: "rgba(255,255,255,0.04)"
+
+  # --- TAGS ---
+  Tag:
+    variants:
+      semantic: [info, success, warning, error]
+      sphere: [...11_spheres]
+    specs:
+      height: 24
+      padding: "4 8"
+      radius: 6
+      font: 12
+
+  # --- NAVIGATION ---
+  Navigation:
+    Sidebar:
+      width: 280
+      collapsed_width: 64
+      items: [sphere_icons, quick_actions]
+    Topbar:
+      height: 64
+      elements: [breadcrumb, search, user_menu, nova_orb]
+    Breadcrumb:
+      separator: "/"
+      max_items: 4
+    OrbitNav:
+      center: user_orb
+      rings: [spheres, agents]
+
+  # --- THREADS ---
+  ThreadNode:
+    variants:
+      type: [memory, decision, session, action, milestone]
+    specs:
+      size: 24
+      glow: "sphere_color @ 40%"
+      connector: "1px dashed rgba(255,255,255,0.2)"
+
+  # --- TIMELINE ---
+  Timeline:
+    Scrubber:
+      height: 8
+      track_color: "rgba(255,255,255,0.1)"
+      progress_color: "#5BA9FF"
+    Marker:
+      size: 12
+      types: [event, decision, milestone]
+    Controls:
+      buttons: [play, pause, speed, branch_switch]
+
+# ============================================================
+# SCREEN LAYOUTS
+# ============================================================
+layouts:
+
+  Home:
+    regions:
+      header: 72
+      universe_view: flex
+      footer: 56
+    behavior: orbit_navigation
+
+  Sphere:
+    regions:
+      topbar: 64
+      sidebar: 300
+      content: flex
+      right_panel: 380 # collapsible
+    responsive:
+      tablet: hide_right_panel
+      mobile: bottom_sheet_navigation
+
+  ItemDetail:
+    regions:
+      header: 64
+      content: flex
+      timeline: 120
+    actions: [edit, archive, link, share]
+
+  NovaAssistant:
+    sections:
+      input: 140
+      interpretation: auto
+      plan_preview: auto
+      decision_branches: 220
+    position: right_panel
+
+  ArchitectView:
+    sections:
+      mega_tree: flex
+      dependency_map: 360
+      actions: 80
+    tools: [zoom, filter, export]
+
+  ThreadsExplorer:
+    sections:
+      timeline_strip: 160
+      thread_graph: flex
+      narrative: 300
+    modes: [linear, graph, constellation]
+
+# ============================================================
+# SPHERE THEMING
+# ============================================================
+sphere_theming:
+  application:
+    header_bg: "sphere_color @ 15%"
+    accent_line: "sphere_color @ 40%"
+    card_border: "sphere_color @ 15%"
+    icon_tint: "sphere_color @ 75%"
+    glow: "sphere_color @ 30%"
+
+  spheres:
+    - { code: personal, color: "#76E6C7", icon: heart }
+    - { code: business, color: "#5BA9FF", icon: briefcase }
+    - { code: scholar, color: "#E0C46B", icon: book }
+    - { code: creative, color: "#FF8BAA", icon: palette }
+    - { code: social, color: "#66D06F", icon: users }
+    - { code: institutions, color: "#D08FFF", icon: building }
+    - { code: methodology, color: "#59D0C6", icon: compass }
+    - { code: xr, color: "#8EC8FF", icon: cube }
+    - { code: entertainment, color: "#FFB04D", icon: star }
+    - { code: ai_lab, color: "#FF5FFF", icon: cpu }
+    - { code: my_team, color: "#5ED8FF", icon: users_group }
+
+# ============================================================
+# AGENT UI COMPONENTS
+# ============================================================
+agents_ui:
+
+  presence_orb:
+    size: 36
+    glow_intensity: 0.6
+    states:
+      idle: { pulse: slow, opacity: 0.7 }
+      active: { pulse: medium, opacity: 1.0 }
+      speaking: { pulse: fast, opacity: 1.0, scale: 1.1 }
+
+  nova_panel:
+    sections:
+      - input_bar
+      - intent_interpretation
+      - candidate_agents
+      - plan_preview
+      - impact_simulation
+      - decision_branches
+
+  architect_panel:
+    sections:
+      - tree_view
+      - workflow_diagram
+      - conflict_detection
+      - auto_restructure
+
+# ============================================================
+# UNIVERSE VIEW
+# ============================================================
+universe_view:
+
+  center_orb:
+    size: 72
+    glow: "#FFFFFF"
+    label: user_name
+
+  sphere_orbits:
+    size_range: [64, 96]
+    orbit_radius: [180, 280, 380]
+    ring_opacity: 0.4
+    hover_scale: 1.15
+
+  cross_links:
+    style: light_thread
+    opacity: 0.3
+    hover_opacity: 0.8
+
+  animations:
+    enter_sphere:
+      duration: 450ms
+      scale: "0.85 → 1.00"
+      blur: "0 → 8px"
+    exit_sphere:
+      duration: 300ms
+      reverse: true
+
+# ============================================================
+# XR SURFACE SPECS
+# ============================================================
+xr_surfaces:
+
+  hologram_panel:
+    transparency: 0.75
+    fresnel: 0.4
+    scanlines: 0.1
+    interaction: gaze_and_tap
+
+  components:
+    - XR_Card
+    - XR_Timeline_Rope
+    - XR_Decision_Branch
+    - XR_Memory_Orb
+    - XR_Portal_Ring
+
+  portal_types:
+    entry: { shape: circle, color: "#8EC8FF" }
+    replay: { shape: ellipse, color: "#FF5FFF" }
+    branch: { shape: diamond, color: "#FFB04D" }
+
+# ============================================================
+# PROTOTYPE FLOWS
+# ============================================================
+prototypes:
+
+  flows:
+    onboarding:
+      steps: [welcome, sphere_intro, first_item, nova_intro]
+    create_item:
+      steps: [trigger, form, category, confirm]
+    summon_nova:
+      steps: [orb_tap, input, interpretation, plan, execute]
+    branch_decision:
+      steps: [identify, compare, simulate, choose]
+    enter_xr:
+      steps: [portal_appear, transition, room_load, orient]
+
+  transitions:
+    easing: "cubic-bezier(.16,1,.3,1)"
+    durations:
+      instant: 0ms
+      fast: 120ms
+      medium: 240ms
+      slow: 450ms
+
+# ============================================================
+# NAMING CONVENTIONS
+# ============================================================
+naming:
+  components: "C/{Category}/{Name}"
+  variants: "{Component}/.{variant}={value}"
+  screens: "S/{Flow}/{State}"
+  icons: "I/{Domain}/{Name}"
+  tokens: "T/{Type}/{Name}"
+
+# Examples:
+#   C/Button/Primary
+#   C/Card/.sphere=business
+#   S/Onboarding/Welcome
+#   I/Sphere/Business
+#   T/Color/Primary

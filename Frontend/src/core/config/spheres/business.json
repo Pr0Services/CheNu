@@ -1,0 +1,68 @@
+{
+  "id": "business",
+  "name": "Business",
+  "type": "business",
+  
+  "visual": {
+    "baseShape": "structure",
+    "color": {
+      "primary": "#1E3A5F",
+      "secondary": "#2A5A8F",
+      "accent": "#D8B26A",
+      "gradient": ["#1E3A5F", "#2A4A7F"]
+    },
+    "growthAxis": "vertical",
+    "icon": "🏢",
+    "glow": {
+      "enabled": true,
+      "intensity": 0.3,
+      "color": "#1E3A5F"
+    }
+  },
+  
+  "layout": {
+    "defaultDimension": "L",
+    "minDimension": "S",
+    "maxDimension": "XL",
+    "childArrangement": "hierarchical",
+    "expansionDirection": "down"
+  },
+  
+  "priority": ["projects", "agents", "metrics", "decisions"],
+  
+  "permissions": {
+    "default": ["read"],
+    "member": ["read", "comment"],
+    "contributor": ["read", "write"],
+    "owner": ["read", "write", "delegate", "configure"]
+  },
+  
+  "content": {
+    "sections": [
+      { "id": "projects", "label": "Projects", "icon": "📁", "order": 1 },
+      { "id": "finance", "label": "Finance", "icon": "💰", "order": 2 },
+      { "id": "strategy", "label": "Strategy", "icon": "🎯", "order": 3 },
+      { "id": "partners", "label": "Partners", "icon": "🤝", "order": 4 }
+    ],
+    "defaultView": "projects"
+  },
+  
+  "agents": {
+    "roles": ["strategy-ai", "finance-analyst", "market-intel", "partnership-mgr", "operations-ai"],
+    "maxVisible": 5,
+    "arrangement": "hierarchical"
+  },
+  
+  "behavior": {
+    "onFocus": { "scale": 1.1, "showDetails": true },
+    "onEnter": { "transition": "slide-down", "duration": 400 },
+    "onIdle": { "animation": "none", "dimAfter": 30000 },
+    "onActive": { "animation": "pulse", "highlight": true }
+  },
+  
+  "rules": {
+    "sizeByContent": true,
+    "motionByActivity": true,
+    "visibilityByPermission": true
+  }
+}

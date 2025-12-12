@@ -1,0 +1,81 @@
+/**
+ * CHE·NU — Base Styles
+ */
+
+:root {
+  --chenu-bg: #0F172A;
+  --chenu-text: #F8FAFC;
+  --chenu-primary: #3B82F6;
+  --chenu-secondary: #8B5CF6;
+  --chenu-accent: #10B981;
+  --chenu-warning: #F59E0B;
+  --chenu-error: #EF4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--chenu-bg);
+  color: var(--chenu-text);
+  min-height: 100vh;
+}
+
+.chenu-app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr auto;
+  min-height: 100vh;
+}
+
+.chenu-header {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.chenu-main {
+  padding: 2rem;
+  overflow: auto;
+}
+
+.chenu-minimap {
+  width: 200px;
+  padding: 1rem;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.chenu-footer {
+  grid-column: 1 / -1;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.chenu-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--chenu-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

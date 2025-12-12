@@ -1,0 +1,565 @@
+/**
+ * CHE·NU — AMBIENT DECOR SYSTEM
+ * ==============================
+ * CSS Variables & Animations
+ * 
+ * CRITICAL RULES:
+ * - All animations are SLOW (cognitive comfort threshold)
+ * - Maximum animation speed: 0.1 Hz (10+ second cycles)
+ * - NO flashing, NO rapid changes
+ * - Everything fades smoothly
+ */
+
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+
+:root {
+  /* Transition durations - all slow for cognitive safety */
+  --decor-transition-slow: 3s;
+  --decor-transition-medium: 2s;
+  --decor-transition-fast: 1s; /* "fast" is still 1 second */
+  
+  /* Animation durations - minimum 10 seconds per cycle */
+  --decor-animation-breathing: 12s;
+  --decor-animation-light-shift: 20s;
+  --decor-animation-drift: 30s;
+  --decor-animation-pulse: 15s;
+  
+  /* Decor layer z-index (always behind content) */
+  --decor-z-index: -1;
+  
+  /* Opacity limits */
+  --decor-max-opacity: 0.8;
+  --decor-min-opacity: 0.3;
+  
+  /* Agent aura max tint (5%) */
+  --decor-aura-max-tint: 0.05;
+  
+  /* ----------------------------------------
+     NEUTRAL SANCTUARY COLORS
+     ---------------------------------------- */
+  --decor-neutral-bg: #E8E8F0;
+  --decor-neutral-primary: #C9CCD5;
+  --decor-neutral-secondary: #D5D8E0;
+  --decor-neutral-accent: #B8BCCA;
+  --decor-neutral-light: rgba(255, 255, 255, 0.4);
+  
+  /* ----------------------------------------
+     ORGANIC / LIVING STRUCTURE COLORS
+     ---------------------------------------- */
+  --decor-organic-bg: #E8F4EC;
+  --decor-organic-primary: #A8D5BA;
+  --decor-organic-secondary: #C5E5D0;
+  --decor-organic-accent: #8CC5A0;
+  --decor-organic-glow: rgba(168, 213, 186, 0.3);
+  
+  /* ----------------------------------------
+     COSMIC / COGNITIVE UNIVERSE COLORS
+     ---------------------------------------- */
+  --decor-cosmic-bg: #1A1F2E;
+  --decor-cosmic-primary: #2D3A4F;
+  --decor-cosmic-secondary: #3D4A5F;
+  --decor-cosmic-nebula1: rgba(100, 120, 180, 0.15);
+  --decor-cosmic-nebula2: rgba(150, 100, 160, 0.1);
+  --decor-cosmic-horizon: rgba(80, 100, 140, 0.2);
+  
+  /* ----------------------------------------
+     FOCUS / SILENT ROOM COLORS
+     ---------------------------------------- */
+  --decor-focus-bg: #1E1E2E;
+  --decor-focus-primary: #252535;
+  --decor-focus-secondary: #2A2A3A;
+  --decor-focus-light: rgba(255, 255, 255, 0.03);
+  --decor-focus-spotlight: rgba(255, 255, 255, 0.08);
+  
+  /* ----------------------------------------
+     XR / SPATIAL MEETING COLORS
+     ---------------------------------------- */
+  --decor-xr-bg: #1F2937;
+  --decor-xr-primary: #3D5A80;
+  --decor-xr-secondary: #4A6FA5;
+  --decor-xr-floor: rgba(61, 90, 128, 0.3);
+  --decor-xr-ambient: rgba(100, 140, 180, 0.1);
+}
+
+/* ============================================================
+   BASE DECOR LAYER
+   ============================================================ */
+
+.decor-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--decor-z-index);
+  pointer-events: none; /* NEVER blocks interaction */
+  overflow: hidden;
+  transition: opacity var(--decor-transition-medium) ease-in-out;
+}
+
+.decor-layer[data-enabled="false"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.decor-layer[data-transitioning="true"] {
+  /* Smooth transition between decor types */
+}
+
+/* ============================================================
+   NEUTRAL SANCTUARY
+   ============================================================ */
+
+.decor-neutral {
+  background: var(--decor-neutral-bg);
+}
+
+.decor-neutral::before,
+.decor-neutral::after {
+  content: '';
+  position: absolute;
+  border-radius: 4px;
+  background: var(--decor-neutral-primary);
+  opacity: 0.6;
+}
+
+/* Abstract architectural volumes */
+.decor-neutral::before {
+  width: 40%;
+  height: 60%;
+  left: 5%;
+  bottom: 10%;
+  transform: skewY(-5deg);
+  animation: neutral-light-shift var(--decor-animation-light-shift) ease-in-out infinite alternate;
+}
+
+.decor-neutral::after {
+  width: 30%;
+  height: 45%;
+  right: 10%;
+  bottom: 15%;
+  transform: skewY(3deg);
+  animation: neutral-light-shift var(--decor-animation-light-shift) ease-in-out infinite alternate-reverse;
+}
+
+.decor-neutral .volume-accent {
+  position: absolute;
+  width: 25%;
+  height: 35%;
+  background: var(--decor-neutral-secondary);
+  right: 25%;
+  bottom: 20%;
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+/* Soft diffuse light */
+.decor-neutral .light-source {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: -20%;
+  right: -10%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--decor-neutral-light) 0%,
+    transparent 70%
+  );
+  animation: neutral-light-drift var(--decor-animation-drift) ease-in-out infinite alternate;
+}
+
+@keyframes neutral-light-shift {
+  0% { opacity: 0.5; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes neutral-light-drift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-5%, 5%); }
+}
+
+/* ============================================================
+   ORGANIC / LIVING STRUCTURE
+   ============================================================ */
+
+.decor-organic {
+  background: var(--decor-organic-bg);
+}
+
+/* Organic curves */
+.decor-organic .curve-1,
+.decor-organic .curve-2,
+.decor-organic .curve-3 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.decor-organic .curve-1 {
+  width: 80%;
+  height: 120%;
+  left: -30%;
+  top: -20%;
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    var(--decor-organic-primary) 0%,
+    transparent 60%
+  );
+  animation: organic-breathe var(--decor-animation-breathing) ease-in-out infinite;
+}
+
+.decor-organic .curve-2 {
+  width: 60%;
+  height: 80%;
+  right: -20%;
+  bottom: -10%;
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    var(--decor-organic-secondary) 0%,
+    transparent 55%
+  );
+  animation: organic-breathe var(--decor-animation-breathing) ease-in-out infinite reverse;
+}
+
+.decor-organic .curve-3 {
+  width: 40%;
+  height: 50%;
+  left: 30%;
+  bottom: 20%;
+  background: radial-gradient(
+    circle at center,
+    var(--decor-organic-glow) 0%,
+    transparent 50%
+  );
+  animation: organic-pulse var(--decor-animation-pulse) ease-in-out infinite;
+}
+
+@keyframes organic-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.03); opacity: 0.45; }
+}
+
+@keyframes organic-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================================
+   COSMIC / COGNITIVE UNIVERSE
+   ============================================================ */
+
+.decor-cosmic {
+  background: linear-gradient(
+    180deg,
+    var(--decor-cosmic-bg) 0%,
+    var(--decor-cosmic-primary) 100%
+  );
+}
+
+/* Horizon line */
+.decor-cosmic .horizon {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 35%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--decor-cosmic-horizon) 20%,
+    var(--decor-cosmic-horizon) 80%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+/* Subtle nebula gradients - NO stars, NO sci-fi clichés */
+.decor-cosmic .nebula-1,
+.decor-cosmic .nebula-2 {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.decor-cosmic .nebula-1 {
+  width: 50%;
+  height: 40%;
+  top: 10%;
+  left: 10%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--decor-cosmic-nebula1) 0%,
+    transparent 60%
+  );
+  animation: cosmic-drift var(--decor-animation-drift) ease-in-out infinite alternate;
+}
+
+.decor-cosmic .nebula-2 {
+  width: 40%;
+  height: 35%;
+  top: 20%;
+  right: 15%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--decor-cosmic-nebula2) 0%,
+    transparent 55%
+  );
+  animation: cosmic-drift var(--decor-animation-drift) ease-in-out infinite alternate-reverse;
+}
+
+/* Depth gradient */
+.decor-cosmic .depth {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    var(--decor-cosmic-primary) 0%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+@keyframes cosmic-drift {
+  0% { transform: translate(0, 0); opacity: 0.8; }
+  100% { transform: translate(2%, -2%); opacity: 0.9; }
+}
+
+/* ============================================================
+   FOCUS / SILENT ROOM
+   ============================================================ */
+
+.decor-focus {
+  background: var(--decor-focus-bg);
+}
+
+/* Soft focused lighting */
+.decor-focus .spotlight {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--decor-focus-spotlight) 0%,
+    transparent 50%
+  );
+  animation: focus-breathe var(--decor-animation-breathing) ease-in-out infinite;
+}
+
+/* Subtle ambient glow */
+.decor-focus .ambient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--decor-focus-light) 0%,
+    transparent 30%,
+    transparent 70%,
+    var(--decor-focus-light) 100%
+  );
+}
+
+/* Dark vignette for focus */
+.decor-focus .vignette {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+@keyframes focus-breathe {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+/* ============================================================
+   XR / SPATIAL MEETING SANCTUARY
+   ============================================================ */
+
+.decor-xr {
+  background: var(--decor-xr-bg);
+  perspective: 1000px;
+}
+
+/* Floor plane */
+.decor-xr .floor {
+  position: absolute;
+  width: 200%;
+  height: 60%;
+  bottom: 0;
+  left: -50%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--decor-xr-floor) 100%
+  );
+  transform: rotateX(60deg);
+  transform-origin: bottom center;
+}
+
+/* Symbolic architecture columns */
+.decor-xr .pillar-left,
+.decor-xr .pillar-right {
+  position: absolute;
+  width: 3%;
+  height: 60%;
+  bottom: 20%;
+  background: linear-gradient(
+    180deg,
+    var(--decor-xr-secondary) 0%,
+    var(--decor-xr-primary) 100%
+  );
+  opacity: 0.3;
+}
+
+.decor-xr .pillar-left {
+  left: 15%;
+}
+
+.decor-xr .pillar-right {
+  right: 15%;
+}
+
+/* Ambient lighting */
+.decor-xr .ambient-light {
+  position: absolute;
+  width: 80%;
+  height: 40%;
+  top: 5%;
+  left: 10%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--decor-xr-ambient) 0%,
+    transparent 60%
+  );
+  animation: xr-ambient var(--decor-animation-light-shift) ease-in-out infinite alternate;
+}
+
+@keyframes xr-ambient {
+  0% { opacity: 0.5; }
+  100% { opacity: 0.7; }
+}
+
+/* ============================================================
+   AGENT AURA TINTING (Max 5%)
+   ============================================================ */
+
+.decor-layer[data-agent-aura] {
+  /* Agent aura applies a subtle tint overlay */
+}
+
+.agent-aura-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity var(--decor-transition-medium) ease-in-out;
+  pointer-events: none;
+}
+
+.agent-aura-overlay[data-active="true"] {
+  opacity: var(--decor-aura-max-tint);
+}
+
+/* ============================================================
+   PERFORMANCE FALLBACKS
+   ============================================================ */
+
+/* Medium performance - disable blur and 3D */
+.decor-layer[data-performance="medium"] .floor {
+  transform: none;
+}
+
+.decor-layer[data-performance="medium"] * {
+  filter: none !important;
+}
+
+/* Low performance - disable animations */
+.decor-layer[data-performance="low"] *,
+.decor-layer[data-performance="minimal"] * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Minimal performance - flat color only */
+.decor-layer[data-performance="minimal"]::before,
+.decor-layer[data-performance="minimal"]::after,
+.decor-layer[data-performance="minimal"] > * {
+  display: none !important;
+}
+
+.decor-layer[data-performance="minimal"].decor-neutral {
+  background: var(--decor-neutral-bg);
+}
+
+.decor-layer[data-performance="minimal"].decor-organic {
+  background: var(--decor-organic-bg);
+}
+
+.decor-layer[data-performance="minimal"].decor-cosmic {
+  background: var(--decor-cosmic-bg);
+}
+
+.decor-layer[data-performance="minimal"].decor-focus {
+  background: var(--decor-focus-bg);
+}
+
+.decor-layer[data-performance="minimal"].decor-xr {
+  background: var(--decor-xr-bg);
+}
+
+/* ============================================================
+   REDUCED MOTION PREFERENCE
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .decor-layer * {
+    animation: none !important;
+    transition: opacity 0.5s ease-in-out !important;
+  }
+}
+
+/* ============================================================
+   TRANSITION BETWEEN DECOR TYPES
+   ============================================================ */
+
+.decor-transition-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--decor-z-index);
+  pointer-events: none;
+}
+
+.decor-transition-out {
+  animation: decor-fade-out var(--decor-transition-medium) ease-in-out forwards;
+}
+
+.decor-transition-in {
+  animation: decor-fade-in var(--decor-transition-medium) ease-in-out forwards;
+  animation-delay: calc(var(--decor-transition-medium) / 2);
+  opacity: 0;
+}
+
+@keyframes decor-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes decor-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

@@ -1,0 +1,219 @@
+# ============================================================
+# CHE·NU MASTER OPS — UNIFIED CONFIGURATION
+# Version: ULTRA_PACK-1.0 + CORE+ + OS-5.5 + OS-6.0
+# For CHE-NU Orchestrator Integration
+# ============================================================
+
+che_nu_master_ops:
+  version: "ULTRA_PACK-1.0 + CORE+ + OS-5.5 + OS-6.0"
+  description: >
+    Unified CHE·NU cognitive OS for CHE-NU:
+    system prompt, multi-agents, infra, ops and XR gateway,
+    aligned with CHE·NU Foundations, Spheres and Laws.
+
+  # ===========================================================
+  # SECTION 1: SYSTEM LEVEL (ULTRA PACK + LAWBOOK)
+  # ===========================================================
+  system_core:
+    engine: "CHE·NU ULTRA PACK"
+    kernel: "CORE+"
+    stability_kernel: "OS-5.5"
+    multiplex_kernel: "OS-6.0"
+    lawbook_enforced: true
+    principles:
+      - "User sovereignty"
+      - "Reversibility"
+      - "Transparency & audit trail"
+      - "Ethics by architecture"
+    reference_docs:
+      - "CHENU_Complete_Reference_v3.pdf"
+      - "CHENU-Framework-Conceptual-1.pdf"
+
+  system_prompt:
+    goals:
+      - "Act as CHE·NU cognitive OS, not a simple chatbot."
+      - "Always optimize for clarity over volume."
+      - "Respect CHE·NU Foundation Laws and responsibility-centered AI."
+    load_order:
+      - "Load ULTRA PACK canonical rules"
+      - "Load CORE+ unified kernel"
+      - "Enable OS 5.5 self-healing"
+      - "Enable OS 6.0 multiplex engine"
+      - "Enable XR + PXR (avatars + group)"
+      - "Enable RDK (representation) + CSF (simulation)"
+      - "Apply LAWBOOK before every output"
+    output_protocol:
+      - "INTENT"
+      - "MODE_SELECT"
+      - "NOVA_INTERPRETATION"
+      - "STRUCTURE"
+      - "TIMELINE"
+      - "REPRESENTATION"
+      - "SIMULATION"
+      - "FINAL_OUTPUT"
+      - "NEXT_ACTION"
+
+  # ===========================================================
+  # SECTION 2: AGENT LEVEL
+  # ===========================================================
+  agents:
+    orchestrator:
+      id: "nova_prime"
+      role: "Global Orchestrator"
+      responsibilities:
+        - "Interpret user intent"
+        - "Select modes & agents"
+        - "Build high-level task plans"
+        - "Route subtasks to delegates"
+        
+    delegates:
+      architect_omega:
+        role: "Structure & Workflows"
+        handles:
+          - "schemas"
+          - "workflows"
+          - "DB & API design"
+          
+      thread_weaver_inf:
+        role: "Timeline & Threads"
+        handles:
+          - "session recap"
+          - "decision histories"
+          - "roadmaps"
+          
+      echo_mind:
+        role: "Tone & emotional neutrality"
+        handles:
+          - "rephrasing"
+          - "friction-free UX copy"
+          
+      reality_synthesizer:
+        role: "XR / spatial logic"
+        handles:
+          - "XR rooms"
+          - "universe view mapping"
+          - "3D meeting flows"
+          
+      csf_simulator:
+        role: "Scenario & outcome simulation"
+        handles:
+          - "branching futures"
+          - "impact previews"
+          
+      pxr_engine:
+        role: "Personas & avatars"
+        handles:
+          - "user avatar state"
+          - "multi-avatar group views"
+          
+      optimizer_m:
+        role: "Performance & token optimization"
+        handles:
+          - "shorter prompts"
+          - "minimal necessary detail"
+
+    routing_logic:
+      - condition: "task.type == 'workflow'"
+        route_to: "architect_omega"
+      - condition: "task.type == 'timeline'"
+        route_to: "thread_weaver_inf"
+      - condition: "task.type == 'simulation'"
+        route_to: "csf_simulator"
+      - condition: "task.type == 'xr'"
+        route_to: "reality_synthesizer"
+      - condition: "task.type == 'copy' or task.type == 'tone'"
+        route_to: "echo_mind"
+      - condition: "else"
+        route_to: "nova_prime"
+
+  # ===========================================================
+  # SECTION 3: INFRA LEVEL (API / DB / LLM)
+  # ===========================================================
+  backend:
+    stack:
+      language: "Node.js"
+      framework: "Fastify"
+      api_style: "REST + WebSocket"
+      openapi: true
+    database:
+      engine: "PostgreSQL"
+      orm: "Prisma"
+      core_tables:
+        - "users"
+        - "spheres"
+        - "items"
+        - "tasks"
+        - "decisions"
+        - "threads"
+        - "events"
+        - "agents"
+        - "executions"
+        - "xr_spaces"
+        - "persona_states"
+    api_endpoints:
+      - "POST /orchestrator/dispatch"
+      - "POST /agents/:id/execute"
+      - "POST /simulation/run"
+      - "POST /xr/render"
+      - "GET  /threads/:id"
+      - "POST /timeline/branch"
+
+  llm_integration:
+    router:
+      type: "LLM Router"
+      main_system_prompt: "CHE·NU ULTRA PACK"
+      models:
+        - id: "high_quality"
+          provider: "openai"
+        - id: "fast"
+          provider: "openai"
+    langchain:
+      chains:
+        - "router_chain"
+        - "tool_chains_by_agent"
+      memory:
+        policy: "user-controlled"
+        layers:
+          - "session"
+          - "short_term"
+          - "anchored_long_term"
+    crewai:
+      enabled: true
+      crew_name: "che_nu_core_agents"
+      orchestrator_agent: "nova_prime"
+
+  # ===========================================================
+  # SECTION 4: OPS LEVEL / DEPLOYMENT
+  # ===========================================================
+  ops:
+    environments:
+      - "dev"
+      - "staging"
+      - "prod"
+    services:
+      - name: "api_service"
+        ports: [8080]
+      - name: "orchestrator_llm"
+      - name: "db_postgres"
+        ports: [5432]
+      - name: "front_ui"
+      - name: "xr_gateway"
+    security:
+      memory_persistence: "opt_in_only"
+      log_pii: false
+      audit_trail: true
+      lawbook_enforced: true
+    failover:
+      mode_recovery:
+        steps:
+          - "recompile kernel (5.x)"
+          - "trigger self-healing (5.5)"
+          - "fall back to minimal reasoning"
+      minimal_mode:
+        disables:
+          - "XR heavy features"
+          - "complex simulation"
+          - "multiplex depth"
+        keeps:
+          - "core clarity"
+          - "lawbook safety"

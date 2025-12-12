@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["apps/web/src/*"],
+      "@core/*": ["apps/web/src/core/*"],
+      "@components/*": ["apps/web/src/components/*"],
+      "@pages/*": ["apps/web/src/pages/*"],
+      "@hooks/*": ["apps/web/src/hooks/*"],
+      "@services/*": ["apps/web/src/services/*"],
+      "@stores/*": ["apps/web/src/stores/*"],
+      "@types/*": ["apps/web/src/types/*"],
+      "@utils/*": ["apps/web/src/utils/*"],
+      "@xr/*": ["apps/web/src/xr/*"],
+      "@agents/*": ["apps/web/src/agents/*"],
+      "@themes/*": ["apps/web/src/themes/*"]
+    }
+  },
+  "include": ["apps/web/src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

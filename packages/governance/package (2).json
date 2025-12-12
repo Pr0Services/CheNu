@@ -1,0 +1,9 @@
+{
+  "name": "@chenu/governance",
+  "version": "1.0.0",
+  "description": "CHE·NU Constitutional Governance + XR Recording - Tree Laws Immutable",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": { "react": ">=17.0.0" },
+  "license": "MIT"
+}

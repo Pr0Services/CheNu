@@ -1,0 +1,64 @@
+{
+  "global": {
+    "layoutMode": "adaptive",
+    "theme": "default",
+    "animations": true,
+    "depthMax": 4
+  },
+
+  "rules": {
+    "sizeByContent": true,
+    "motionByActivity": true,
+    "visibilityByPermission": true,
+    "progressiveDisclosure": true
+  },
+
+  "dimensions": {
+    "contentVolume": {
+      "low": { "scale": 0.6 },
+      "medium": { "scale": 1.0 },
+      "high": { "scale": 1.6 }
+    },
+    "activity": {
+      "idle": { "animation": "none" },
+      "active": { "animation": "pulse" },
+      "intense": { "animation": "orbit" }
+    },
+    "complexity": {
+      "simple": { "ui": "minimal" },
+      "advanced": { "ui": "expanded" }
+    }
+  },
+
+  "breakpoints": {
+    "mobile": { "maxWidth": 640, "columns": 1, "sphereScale": 0.7 },
+    "tablet": { "maxWidth": 1024, "columns": 2, "sphereScale": 0.85 },
+    "desktop": { "maxWidth": 1440, "columns": 3, "sphereScale": 1.0 },
+    "wide": { "maxWidth": 9999, "columns": 4, "sphereScale": 1.2 }
+  },
+
+  "transitions": {
+    "default": {
+      "duration": 300,
+      "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "slow": {
+      "duration": 500,
+      "easing": "cubic-bezier(0.4, 0, 0.6, 1)"
+    },
+    "bounce": {
+      "duration": 400,
+      "easing": "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+    }
+  },
+
+  "zIndex": {
+    "background": 0,
+    "spheres": 10,
+    "focusedSphere": 20,
+    "agents": 30,
+    "overlay": 40,
+    "modal": 50,
+    "tooltip": 60
+  }
+}

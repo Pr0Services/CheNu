@@ -1,0 +1,68 @@
+{
+  "id": "personal",
+  "name": "Personal",
+  "type": "personal",
+  
+  "visual": {
+    "baseShape": "organic",
+    "color": {
+      "primary": "#4CAF50",
+      "secondary": "#66BB6A",
+      "accent": "#A5D6A7",
+      "gradient": ["#4CAF50", "#66BB6A"]
+    },
+    "growthAxis": "radial",
+    "icon": "🧑",
+    "glow": {
+      "enabled": true,
+      "intensity": 0.25,
+      "color": "#4CAF50"
+    }
+  },
+  
+  "layout": {
+    "defaultDimension": "M",
+    "minDimension": "S",
+    "maxDimension": "L",
+    "childArrangement": "organic",
+    "expansionDirection": "radial"
+  },
+  
+  "priority": ["health", "goals", "learning", "finance"],
+  
+  "permissions": {
+    "default": [],
+    "self": ["read", "write", "delete"],
+    "trusted": ["read"]
+  },
+  
+  "content": {
+    "sections": [
+      { "id": "health", "label": "Health", "icon": "❤️", "order": 1 },
+      { "id": "goals", "label": "Goals", "icon": "🎯", "order": 2 },
+      { "id": "learning", "label": "Learning", "icon": "📚", "order": 3 },
+      { "id": "finance", "label": "Finance", "icon": "💰", "order": 4 }
+    ],
+    "defaultView": "goals"
+  },
+  
+  "agents": {
+    "roles": ["life-manager", "health-tracker", "finance-advisor", "learning-coach"],
+    "maxVisible": 4,
+    "arrangement": "orbital"
+  },
+  
+  "behavior": {
+    "onFocus": { "scale": 1.1, "showDetails": true },
+    "onEnter": { "transition": "expand-radial", "duration": 400 },
+    "onIdle": { "animation": "breathe", "dimAfter": 120000 },
+    "onActive": { "animation": "pulse", "highlight": true }
+  },
+  
+  "rules": {
+    "sizeByContent": true,
+    "motionByActivity": true,
+    "visibilityByPermission": true,
+    "privateByDefault": true
+  }
+}

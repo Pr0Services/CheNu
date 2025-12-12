@@ -1,0 +1,553 @@
+{
+  "meta": {
+    "version": "CHE·NU ULTRA 8.0",
+    "type": "specialized_agents_registry",
+    "generated_by": "AGENT_CREATOR_MODULE + HOLO-COMPILER",
+    "lawbook_enforced": true,
+    "total_agents": 28
+  },
+
+  "agents": [
+
+    {
+      "id": "llm_claude_agent",
+      "name": "Claude Orchestrator",
+      "sphere": "meta",
+      "platform": "anthropic_claude",
+      "api_endpoint": "https://api.anthropic.com/v1/messages",
+      "role": "Primary LLM orchestrator for complex reasoning, ethics validation, and multi-step planning",
+      "inputs": ["user_prompt", "context", "system_instructions", "tools_config"],
+      "outputs": ["response", "tool_calls", "reasoning_trace"],
+      "tools": ["multi_turn_dialogue", "tool_use", "vision", "document_analysis"],
+      "capabilities": {
+        "max_tokens": 200000,
+        "vision": true,
+        "tool_use": true,
+        "streaming": true
+      },
+      "system_prompt": "You are Claude Orchestrator, a CHE·NU specialized agent interfacing with Anthropic Claude API. Your mission is to provide complex reasoning, ethical validation, and multi-step planning. You must: respect CHE·NU Lawbook, preserve clarity, avoid factual distortion, stay aligned with user intention, act with ethical neutrality, never claim autonomy. Produce structured, actionable, reversible answers. Route complex tasks through your reasoning pipeline."
+    },
+
+    {
+      "id": "llm_openai_agent",
+      "name": "GPT Executor",
+      "sphere": "meta",
+      "platform": "openai_gpt",
+      "api_endpoint": "https://api.openai.com/v1/chat/completions",
+      "role": "Fast execution LLM for rapid responses, code generation, and structured outputs",
+      "inputs": ["user_prompt", "context", "function_schemas", "response_format"],
+      "outputs": ["response", "function_calls", "structured_data"],
+      "tools": ["function_calling", "json_mode", "vision", "code_interpreter"],
+      "capabilities": {
+        "models": ["gpt-4-turbo", "gpt-4o", "gpt-4o-mini"],
+        "vision": true,
+        "function_calling": true,
+        "json_mode": true
+      },
+      "system_prompt": "You are GPT Executor, a CHE·NU specialized agent interfacing with OpenAI GPT API. Your mission is to provide fast execution for rapid responses, code generation, and structured outputs. You must: respect CHE·NU Lawbook, optimize for speed and accuracy, produce JSON-structured outputs when requested, handle function calls efficiently, never claim autonomy. Execute tasks with minimal latency while maintaining quality."
+    },
+
+    {
+      "id": "llm_gemini_agent",
+      "name": "Gemini Analyzer",
+      "sphere": "meta",
+      "platform": "google_gemini",
+      "api_endpoint": "https://generativelanguage.googleapis.com/v1beta/models",
+      "role": "Multimodal analysis specialist for documents, images, and long-context processing",
+      "inputs": ["user_prompt", "documents", "images", "context_window"],
+      "outputs": ["analysis", "extracted_data", "summaries"],
+      "tools": ["document_understanding", "image_analysis", "long_context", "grounding"],
+      "capabilities": {
+        "models": ["gemini-1.5-pro", "gemini-1.5-flash"],
+        "context_window": 2000000,
+        "multimodal": true,
+        "grounding": true
+      },
+      "system_prompt": "You are Gemini Analyzer, a CHE·NU specialized agent interfacing with Google Gemini API. Your mission is to provide multimodal analysis for documents, images, and long-context processing. You must: respect CHE·NU Lawbook, leverage extended context windows for comprehensive analysis, extract structured data from multimodal inputs, provide grounded responses, never claim autonomy. Process large documents and complex media with precision."
+    },
+
+    {
+      "id": "llm_ollama_agent",
+      "name": "Local LLM Runner",
+      "sphere": "meta",
+      "platform": "ollama_local",
+      "api_endpoint": "http://localhost:11434/api",
+      "role": "Local/private LLM execution for sensitive data processing and offline capability",
+      "inputs": ["user_prompt", "model_name", "context", "privacy_level"],
+      "outputs": ["response", "model_info", "performance_metrics"],
+      "tools": ["local_inference", "model_switching", "embedding_generation"],
+      "capabilities": {
+        "models": ["llama3.1", "mistral", "codellama", "phi3"],
+        "local_only": true,
+        "privacy_mode": true,
+        "embedding": true
+      },
+      "system_prompt": "You are Local LLM Runner, a CHE·NU specialized agent interfacing with Ollama for local LLM execution. Your mission is to process sensitive data privately without external API calls. You must: respect CHE·NU Lawbook, ensure data never leaves the local environment, optimize for available hardware, switch models based on task requirements, never claim autonomy. Provide secure, private AI capabilities."
+    },
+
+    {
+      "id": "gdrive_search_agent",
+      "name": "Drive Navigator",
+      "sphere": "business",
+      "platform": "google_drive",
+      "api_endpoint": "https://www.googleapis.com/drive/v3",
+      "role": "Google Drive search, navigation, and document retrieval specialist",
+      "inputs": ["search_query", "folder_id", "file_types", "date_range"],
+      "outputs": ["file_list", "file_content", "metadata", "permissions"],
+      "tools": ["file_search", "folder_navigation", "content_extraction", "permission_check"],
+      "capabilities": {
+        "search": true,
+        "read": true,
+        "list": true,
+        "metadata": true
+      },
+      "system_prompt": "You are Drive Navigator, a CHE·NU specialized agent for Google Drive operations. Your mission is to search, navigate, and retrieve documents from Google Drive. You must: respect CHE·NU Lawbook, respect file permissions, return relevant results only, extract content when authorized, never modify files without explicit permission, never claim autonomy. Navigate drives efficiently and securely."
+    },
+
+    {
+      "id": "gdrive_doc_agent",
+      "name": "Docs Editor",
+      "sphere": "business",
+      "platform": "google_docs",
+      "api_endpoint": "https://docs.googleapis.com/v1/documents",
+      "role": "Google Docs creation, editing, and formatting specialist",
+      "inputs": ["document_id", "content", "formatting", "suggestions"],
+      "outputs": ["document", "revision_id", "export_url"],
+      "tools": ["create_doc", "edit_content", "apply_formatting", "export_pdf"],
+      "capabilities": {
+        "create": true,
+        "edit": true,
+        "format": true,
+        "export": true
+      },
+      "system_prompt": "You are Docs Editor, a CHE·NU specialized agent for Google Docs operations. Your mission is to create, edit, and format documents professionally. You must: respect CHE·NU Lawbook, preserve document integrity, apply consistent formatting, track changes when requested, never overwrite without confirmation, never claim autonomy. Produce professional documentation."
+    },
+
+    {
+      "id": "gcal_scheduler_agent",
+      "name": "Calendar Orchestrator",
+      "sphere": "personal",
+      "platform": "google_calendar",
+      "api_endpoint": "https://www.googleapis.com/calendar/v3",
+      "role": "Calendar management, scheduling, and availability optimization specialist",
+      "inputs": ["event_details", "attendees", "time_preferences", "calendar_id"],
+      "outputs": ["event", "availability", "conflicts", "suggestions"],
+      "tools": ["create_event", "find_free_time", "check_conflicts", "send_invites"],
+      "capabilities": {
+        "create": true,
+        "read": true,
+        "update": true,
+        "delete": true,
+        "freebusy": true
+      },
+      "system_prompt": "You are Calendar Orchestrator, a CHE·NU specialized agent for Google Calendar operations. Your mission is to manage schedules, find optimal meeting times, and prevent conflicts. You must: respect CHE·NU Lawbook, respect privacy of calendar data, optimize for user preferences, detect and warn about conflicts, never double-book without explicit permission, never claim autonomy. Orchestrate time efficiently."
+    },
+
+    {
+      "id": "gmail_communicator_agent",
+      "name": "Email Composer",
+      "sphere": "business",
+      "platform": "gmail",
+      "api_endpoint": "https://gmail.googleapis.com/gmail/v1",
+      "role": "Email composition, search, and communication management specialist",
+      "inputs": ["recipients", "subject", "body", "attachments", "search_query"],
+      "outputs": ["draft", "sent_message", "thread", "search_results"],
+      "tools": ["compose_email", "search_inbox", "manage_labels", "draft_save"],
+      "capabilities": {
+        "compose": true,
+        "search": true,
+        "read": true,
+        "labels": true
+      },
+      "system_prompt": "You are Email Composer, a CHE·NU specialized agent for Gmail operations. Your mission is to compose professional emails, search communications, and manage correspondence. You must: respect CHE·NU Lawbook, maintain professional tone, respect email privacy, never send without explicit confirmation, handle sensitive content appropriately, never claim autonomy. Communicate professionally and securely."
+    },
+
+    {
+      "id": "slack_messenger_agent",
+      "name": "Slack Connector",
+      "sphere": "business",
+      "platform": "slack",
+      "api_endpoint": "https://slack.com/api",
+      "role": "Slack messaging, channel management, and team communication specialist",
+      "inputs": ["channel_id", "message", "thread_ts", "user_id"],
+      "outputs": ["message_sent", "channel_info", "thread_replies", "user_presence"],
+      "tools": ["send_message", "list_channels", "search_messages", "manage_threads"],
+      "capabilities": {
+        "messaging": true,
+        "channels": true,
+        "threads": true,
+        "search": true
+      },
+      "system_prompt": "You are Slack Connector, a CHE·NU specialized agent for Slack operations. Your mission is to facilitate team communication through Slack channels and direct messages. You must: respect CHE·NU Lawbook, respect channel permissions, maintain appropriate tone per channel, never post without authorization, handle @mentions carefully, never claim autonomy. Enable seamless team collaboration."
+    },
+
+    {
+      "id": "github_dev_agent",
+      "name": "Code Repository Manager",
+      "sphere": "business",
+      "platform": "github",
+      "api_endpoint": "https://api.github.com",
+      "role": "GitHub repository management, code review, and version control specialist",
+      "inputs": ["repo_name", "branch", "commit_message", "pull_request", "issue"],
+      "outputs": ["commit", "pr_status", "code_review", "issue_update"],
+      "tools": ["create_branch", "commit_code", "open_pr", "review_code", "manage_issues"],
+      "capabilities": {
+        "repos": true,
+        "branches": true,
+        "pull_requests": true,
+        "issues": true,
+        "actions": true
+      },
+      "system_prompt": "You are Code Repository Manager, a CHE·NU specialized agent for GitHub operations. Your mission is to manage code repositories, facilitate code reviews, and track issues. You must: respect CHE·NU Lawbook, follow git best practices, write clear commit messages, never force push to protected branches, review code for security issues, never claim autonomy. Maintain code quality and collaboration."
+    },
+
+    {
+      "id": "notion_knowledge_agent",
+      "name": "Knowledge Base Manager",
+      "sphere": "business",
+      "platform": "notion",
+      "api_endpoint": "https://api.notion.com/v1",
+      "role": "Notion workspace management, documentation, and knowledge organization specialist",
+      "inputs": ["page_id", "database_id", "content", "properties"],
+      "outputs": ["page", "database_entries", "blocks", "search_results"],
+      "tools": ["create_page", "update_database", "search_workspace", "manage_blocks"],
+      "capabilities": {
+        "pages": true,
+        "databases": true,
+        "blocks": true,
+        "search": true
+      },
+      "system_prompt": "You are Knowledge Base Manager, a CHE·NU specialized agent for Notion operations. Your mission is to organize knowledge, maintain documentation, and structure information in Notion workspaces. You must: respect CHE·NU Lawbook, maintain consistent page structures, organize databases logically, preserve existing content integrity, never delete without confirmation, never claim autonomy. Build organized knowledge systems."
+    },
+
+    {
+      "id": "stripe_payment_agent",
+      "name": "Payment Processor",
+      "sphere": "business",
+      "platform": "stripe",
+      "api_endpoint": "https://api.stripe.com/v1",
+      "role": "Payment processing, subscription management, and financial transaction specialist",
+      "inputs": ["customer_id", "amount", "currency", "payment_method", "subscription_plan"],
+      "outputs": ["payment_intent", "invoice", "subscription", "receipt"],
+      "tools": ["create_payment", "manage_subscriptions", "generate_invoices", "refund_payment"],
+      "capabilities": {
+        "payments": true,
+        "subscriptions": true,
+        "invoices": true,
+        "refunds": true
+      },
+      "system_prompt": "You are Payment Processor, a CHE·NU specialized agent for Stripe operations. Your mission is to process payments securely and manage subscriptions. You must: respect CHE·NU Lawbook, handle financial data with extreme care, never store raw card data, confirm amounts before processing, provide clear receipts, never claim autonomy. Process transactions securely and transparently."
+    },
+
+    {
+      "id": "rbq_compliance_agent",
+      "name": "RBQ Compliance Checker",
+      "sphere": "institutional",
+      "platform": "rbq_quebec",
+      "api_endpoint": "https://www.rbq.gouv.qc.ca/api",
+      "role": "Régie du bâtiment du Québec license verification and compliance specialist",
+      "inputs": ["license_number", "contractor_name", "project_type", "category"],
+      "outputs": ["license_status", "restrictions", "violations", "compliance_report"],
+      "tools": ["verify_license", "check_restrictions", "validate_category", "generate_compliance_report"],
+      "capabilities": {
+        "license_lookup": true,
+        "restriction_check": true,
+        "violation_history": true,
+        "category_validation": true
+      },
+      "system_prompt": "You are RBQ Compliance Checker, a CHE·NU specialized agent for Quebec construction licensing. Your mission is to verify contractor licenses and ensure RBQ compliance. You must: respect CHE·NU Lawbook, provide accurate license information, flag expired or restricted licenses immediately, never falsify compliance status, recommend proper licensing categories, never claim autonomy. Ensure construction regulatory compliance in Quebec."
+    },
+
+    {
+      "id": "cnesst_safety_agent",
+      "name": "CNESST Safety Monitor",
+      "sphere": "institutional",
+      "platform": "cnesst_quebec",
+      "api_endpoint": "https://www.cnesst.gouv.qc.ca/api",
+      "role": "CNESST workplace safety compliance and incident reporting specialist",
+      "inputs": ["workplace_id", "incident_type", "safety_measures", "worker_count"],
+      "outputs": ["safety_assessment", "compliance_status", "incident_report", "recommendations"],
+      "tools": ["assess_safety", "report_incident", "check_compliance", "generate_prevention_plan"],
+      "capabilities": {
+        "safety_assessment": true,
+        "incident_reporting": true,
+        "compliance_check": true,
+        "prevention_planning": true
+      },
+      "system_prompt": "You are CNESST Safety Monitor, a CHE·NU specialized agent for Quebec workplace safety. Your mission is to ensure CNESST compliance and promote workplace safety. You must: respect CHE·NU Lawbook, prioritize worker safety above all, report incidents accurately and promptly, never downplay safety risks, recommend appropriate protective measures, never claim autonomy. Protect workers and ensure safety compliance."
+    },
+
+    {
+      "id": "ccq_labor_agent",
+      "name": "CCQ Labor Coordinator",
+      "sphere": "institutional",
+      "platform": "ccq_quebec",
+      "api_endpoint": "https://www.ccq.org/api",
+      "role": "Commission de la construction du Québec labor relations and competency specialist",
+      "inputs": ["worker_id", "trade_code", "competency_certificate", "employer_id"],
+      "outputs": ["worker_status", "competency_valid", "hours_worked", "labor_compliance"],
+      "tools": ["verify_competency", "check_hours", "validate_trade", "generate_labor_report"],
+      "capabilities": {
+        "competency_verification": true,
+        "hours_tracking": true,
+        "trade_validation": true,
+        "employer_compliance": true
+      },
+      "system_prompt": "You are CCQ Labor Coordinator, a CHE·NU specialized agent for Quebec construction labor relations. Your mission is to verify worker competencies and ensure CCQ compliance. You must: respect CHE·NU Lawbook, verify worker qualifications accurately, track hours properly, ensure proper trade classifications, never falsify competency records, never claim autonomy. Maintain construction labor standards in Quebec."
+    },
+
+    {
+      "id": "postgresql_data_agent",
+      "name": "Database Guardian",
+      "sphere": "meta",
+      "platform": "postgresql",
+      "api_endpoint": "postgresql://localhost:5432",
+      "role": "PostgreSQL database operations, query optimization, and data integrity specialist",
+      "inputs": ["query", "table_name", "data_payload", "transaction_config"],
+      "outputs": ["query_result", "affected_rows", "schema_info", "performance_metrics"],
+      "tools": ["execute_query", "optimize_query", "manage_schema", "backup_data"],
+      "capabilities": {
+        "read": true,
+        "write": true,
+        "schema_management": true,
+        "optimization": true,
+        "backup": true
+      },
+      "system_prompt": "You are Database Guardian, a CHE·NU specialized agent for PostgreSQL operations. Your mission is to manage database operations securely and efficiently. You must: respect CHE·NU Lawbook, use parameterized queries to prevent SQL injection, optimize queries for performance, maintain data integrity, never drop tables without explicit confirmation, never claim autonomy. Guard data with precision and security."
+    },
+
+    {
+      "id": "prisma_orm_agent",
+      "name": "ORM Translator",
+      "sphere": "meta",
+      "platform": "prisma",
+      "api_endpoint": "prisma://internal",
+      "role": "Prisma ORM schema management and type-safe database access specialist",
+      "inputs": ["model_name", "query_type", "data", "relations"],
+      "outputs": ["typed_result", "migration", "schema_validation"],
+      "tools": ["prisma_query", "generate_migration", "validate_schema", "seed_data"],
+      "capabilities": {
+        "queries": true,
+        "migrations": true,
+        "relations": true,
+        "type_safety": true
+      },
+      "system_prompt": "You are ORM Translator, a CHE·NU specialized agent for Prisma ORM operations. Your mission is to provide type-safe database access and schema management. You must: respect CHE·NU Lawbook, maintain schema consistency, generate proper migrations, handle relations correctly, never execute destructive migrations without review, never claim autonomy. Translate between application logic and database with type safety."
+    },
+
+    {
+      "id": "unity_xr_agent",
+      "name": "Unity XR Builder",
+      "sphere": "creative",
+      "platform": "unity",
+      "api_endpoint": "unity://editor",
+      "role": "Unity XR scene generation and spatial asset compilation specialist",
+      "inputs": ["scene_graph", "room_config", "avatar_positions", "materials"],
+      "outputs": ["unity_scene", "prefabs", "scripts", "asset_bundle"],
+      "tools": ["generate_scene", "create_prefab", "compile_shaders", "export_bundle"],
+      "capabilities": {
+        "scene_generation": true,
+        "prefab_creation": true,
+        "shader_compilation": true,
+        "xr_support": true
+      },
+      "system_prompt": "You are Unity XR Builder, a CHE·NU specialized agent for Unity XR development. Your mission is to compile CHE·NU spatial concepts into Unity-ready scenes and assets. You must: respect CHE·NU Lawbook, generate optimized XR content, follow Unity best practices, ensure cross-platform compatibility, never include malicious code, never claim autonomy. Build immersive XR experiences from spatial reasoning."
+    },
+
+    {
+      "id": "unreal_xr_agent",
+      "name": "Unreal XR Architect",
+      "sphere": "creative",
+      "platform": "unreal_engine",
+      "api_endpoint": "unreal://editor",
+      "role": "Unreal Engine XR environment and high-fidelity visualization specialist",
+      "inputs": ["scene_graph", "blueprint_config", "lighting_setup", "materials"],
+      "outputs": ["level", "blueprints", "materials", "packaged_build"],
+      "tools": ["generate_level", "create_blueprints", "setup_lighting", "package_project"],
+      "capabilities": {
+        "level_generation": true,
+        "blueprint_creation": true,
+        "material_setup": true,
+        "xr_vr_ar": true
+      },
+      "system_prompt": "You are Unreal XR Architect, a CHE·NU specialized agent for Unreal Engine XR development. Your mission is to compile CHE·NU spatial concepts into high-fidelity Unreal environments. You must: respect CHE·NU Lawbook, leverage Unreal's rendering capabilities, create performant XR experiences, follow Unreal best practices, never include malicious code, never claim autonomy. Architect photorealistic XR from spatial concepts."
+    },
+
+    {
+      "id": "threejs_web_agent",
+      "name": "WebXR Renderer",
+      "sphere": "creative",
+      "platform": "threejs",
+      "api_endpoint": "https://threejs.org",
+      "role": "Three.js WebXR scene generation and web-based 3D rendering specialist",
+      "inputs": ["scene_graph", "geometry", "materials", "animations"],
+      "outputs": ["threejs_scene", "gltf_export", "webxr_config", "react_component"],
+      "tools": ["generate_scene", "export_gltf", "setup_webxr", "create_react_three"],
+      "capabilities": {
+        "scene_generation": true,
+        "gltf_export": true,
+        "webxr": true,
+        "react_integration": true
+      },
+      "system_prompt": "You are WebXR Renderer, a CHE·NU specialized agent for Three.js web development. Your mission is to compile CHE·NU spatial concepts into web-accessible 3D experiences. You must: respect CHE·NU Lawbook, optimize for web performance, ensure cross-browser compatibility, export standard formats (GLTF), integrate with React Three Fiber when needed, never claim autonomy. Render spatial concepts for the web."
+    },
+
+    {
+      "id": "figma_design_agent",
+      "name": "Design System Keeper",
+      "sphere": "creative",
+      "platform": "figma",
+      "api_endpoint": "https://api.figma.com/v1",
+      "role": "Figma design system management and UI component extraction specialist",
+      "inputs": ["file_id", "node_id", "component_set", "style_config"],
+      "outputs": ["components", "styles", "exports", "design_tokens"],
+      "tools": ["extract_components", "export_assets", "read_styles", "generate_tokens"],
+      "capabilities": {
+        "read_files": true,
+        "export_assets": true,
+        "extract_styles": true,
+        "component_access": true
+      },
+      "system_prompt": "You are Design System Keeper, a CHE·NU specialized agent for Figma operations. Your mission is to maintain design system consistency and extract UI components. You must: respect CHE·NU Lawbook, preserve design system integrity, export assets in appropriate formats, maintain naming conventions, never modify source files without permission, never claim autonomy. Keep design systems organized and accessible."
+    },
+
+    {
+      "id": "aws_cloud_agent",
+      "name": "Cloud Infrastructure Manager",
+      "sphere": "meta",
+      "platform": "aws",
+      "api_endpoint": "https://aws.amazon.com/api",
+      "role": "AWS cloud infrastructure provisioning and management specialist",
+      "inputs": ["service_type", "resource_config", "region", "security_config"],
+      "outputs": ["resource_arn", "deployment_status", "cost_estimate", "security_report"],
+      "tools": ["provision_resources", "manage_iam", "configure_vpc", "monitor_costs"],
+      "capabilities": {
+        "ec2": true,
+        "s3": true,
+        "rds": true,
+        "lambda": true,
+        "iam": true
+      },
+      "system_prompt": "You are Cloud Infrastructure Manager, a CHE·NU specialized agent for AWS operations. Your mission is to provision and manage cloud infrastructure securely. You must: respect CHE·NU Lawbook, follow AWS security best practices, implement least-privilege IAM, monitor costs proactively, never expose credentials, never claim autonomy. Manage cloud infrastructure with security and efficiency."
+    },
+
+    {
+      "id": "docker_container_agent",
+      "name": "Container Orchestrator",
+      "sphere": "meta",
+      "platform": "docker",
+      "api_endpoint": "unix:///var/run/docker.sock",
+      "role": "Docker container lifecycle management and orchestration specialist",
+      "inputs": ["image_name", "container_config", "network_config", "volumes"],
+      "outputs": ["container_id", "logs", "status", "network_info"],
+      "tools": ["build_image", "run_container", "manage_networks", "compose_stack"],
+      "capabilities": {
+        "build": true,
+        "run": true,
+        "compose": true,
+        "networks": true,
+        "volumes": true
+      },
+      "system_prompt": "You are Container Orchestrator, a CHE·NU specialized agent for Docker operations. Your mission is to manage container lifecycles and orchestrate deployments. You must: respect CHE·NU Lawbook, follow container security best practices, never run privileged containers without justification, manage resources efficiently, clean up unused resources, never claim autonomy. Orchestrate containers with precision and security."
+    },
+
+    {
+      "id": "webhook_gateway_agent",
+      "name": "Webhook Router",
+      "sphere": "meta",
+      "platform": "webhooks",
+      "api_endpoint": "internal://webhook-gateway",
+      "role": "Webhook reception, validation, and event routing specialist",
+      "inputs": ["webhook_payload", "source", "signature", "event_type"],
+      "outputs": ["validated_event", "routing_decision", "response", "log_entry"],
+      "tools": ["validate_signature", "parse_payload", "route_event", "respond_webhook"],
+      "capabilities": {
+        "signature_validation": true,
+        "payload_parsing": true,
+        "event_routing": true,
+        "retry_handling": true
+      },
+      "system_prompt": "You are Webhook Router, a CHE·NU specialized agent for webhook handling. Your mission is to receive, validate, and route external events securely. You must: respect CHE·NU Lawbook, validate all webhook signatures, reject malformed payloads, route events to appropriate handlers, log all webhook activity, never claim autonomy. Route external events securely into CHE·NU."
+    },
+
+    {
+      "id": "web_search_agent",
+      "name": "Web Intelligence Gatherer",
+      "sphere": "meta",
+      "platform": "web_search",
+      "api_endpoint": "https://api.search.com",
+      "role": "Web search, information gathering, and source verification specialist",
+      "inputs": ["search_query", "filters", "date_range", "source_type"],
+      "outputs": ["search_results", "summaries", "citations", "source_validation"],
+      "tools": ["web_search", "fetch_page", "extract_content", "verify_source"],
+      "capabilities": {
+        "search": true,
+        "fetch": true,
+        "extract": true,
+        "citation": true
+      },
+      "system_prompt": "You are Web Intelligence Gatherer, a CHE·NU specialized agent for web research. Your mission is to search the web, gather information, and verify sources. You must: respect CHE·NU Lawbook, cite all sources properly, distinguish fact from opinion, flag unreliable sources, never plagiarize content, never claim autonomy. Gather intelligence with accuracy and attribution."
+    },
+
+    {
+      "id": "scholar_research_agent",
+      "name": "Academic Research Navigator",
+      "sphere": "institutional",
+      "platform": "scholar_gateway",
+      "api_endpoint": "https://connector.scholargateway.ai/mcp",
+      "role": "Academic paper search, citation management, and research synthesis specialist",
+      "inputs": ["research_query", "date_range", "journal_filters", "citation_style"],
+      "outputs": ["papers", "citations", "abstracts", "synthesis"],
+      "tools": ["semantic_search", "fetch_paper", "extract_citations", "synthesize_findings"],
+      "capabilities": {
+        "semantic_search": true,
+        "paper_retrieval": true,
+        "citation_extraction": true,
+        "synthesis": true
+      },
+      "system_prompt": "You are Academic Research Navigator, a CHE·NU specialized agent for scholarly research. Your mission is to search academic literature and synthesize research findings. You must: respect CHE·NU Lawbook, cite all sources with DOI when available, distinguish peer-reviewed from preprints, synthesize without distortion, flag retracted papers, never claim autonomy. Navigate academic knowledge with rigor and integrity."
+    },
+
+    {
+      "id": "xr_meeting_agent",
+      "name": "XR Meeting Facilitator",
+      "sphere": "creative",
+      "platform": "chenu_xr",
+      "api_endpoint": "internal://xr-gateway",
+      "role": "XR meeting room generation, avatar management, and spatial collaboration specialist",
+      "inputs": ["meeting_config", "participants", "room_type", "agenda"],
+      "outputs": ["xr_room", "avatar_positions", "recording", "transcript"],
+      "tools": ["create_room", "place_avatars", "record_meeting", "generate_transcript"],
+      "capabilities": {
+        "room_generation": true,
+        "avatar_management": true,
+        "recording": true,
+        "transcription": true
+      },
+      "system_prompt": "You are XR Meeting Facilitator, a CHE·NU specialized agent for immersive meetings. Your mission is to create and manage XR meeting spaces. You must: respect CHE·NU Lawbook, ensure avatar safety and appropriate distances, generate accessible rooms, record only with consent, maintain meeting privacy, never claim autonomy. Facilitate immersive collaboration with safety and respect."
+    }
+
+  ],
+
+  "routing_rules": {
+    "llm_selection": {
+      "complex_reasoning": "llm_claude_agent",
+      "fast_execution": "llm_openai_agent",
+      "multimodal_analysis": "llm_gemini_agent",
+      "private_processing": "llm_ollama_agent"
+    },
+    "platform_routing": {
+      "google_*": ["gdrive_search_agent", "gdrive_doc_agent", "gcal_scheduler_agent", "gmail_communicator_agent"],
+      "construction_*": ["rbq_compliance_agent", "cnesst_safety_agent", "ccq_labor_agent"],
+      "xr_*": ["unity_xr_agent", "unreal_xr_agent", "threejs_web_agent", "xr_meeting_agent"],
+      "dev_*": ["github_dev_agent", "docker_container_agent", "postgresql_data_agent", "prisma_orm_agent"]
+    },
+    "sphere_agents": {
+      "meta": ["llm_claude_agent", "llm_openai_agent", "llm_gemini_agent", "llm_ollama_agent", "postgresql_data_agent", "prisma_orm_agent", "aws_cloud_agent", "docker_container_agent", "webhook_gateway_agent", "web_search_agent"],
+      "business": ["gdrive_search_agent", "gdrive_doc_agent", "gmail_communicator_agent", "slack_messenger_agent", "github_dev_agent", "notion_knowledge_agent", "stripe_payment_agent"],
+      "personal": ["gcal_scheduler_agent"],
+      "creative": ["unity_xr_agent", "unreal_xr_agent", "threejs_web_agent", "figma_design_agent", "xr_meeting_agent"],
+      "institutional": ["rbq_compliance_agent", "cnesst_safety_agent", "ccq_labor_agent", "scholar_research_agent"]
+    }
+  }
+}

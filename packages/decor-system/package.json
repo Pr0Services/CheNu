@@ -1,0 +1,53 @@
+{
+  "name": "@chenu/ambient-decor",
+  "version": "1.0.0",
+  "description": "CHE·NU Ambient Decor System - Visual comfort layer for cognitive safety",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc && npm run build:esm",
+    "build:esm": "tsc --module ESNext --outDir dist/esm",
+    "dev": "tsc --watch",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "test": "jest",
+    "storybook": "storybook dev -p 6006",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "chenu",
+    "ambient",
+    "decor",
+    "ui",
+    "cognitive",
+    "comfort",
+    "react",
+    "visual"
+  ],
+  "author": "CHE·NU",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "@testing-library/react": "^14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chenu/ambient-decor"
+  },
+  "bugs": {
+    "url": "https://github.com/chenu/ambient-decor/issues"
+  },
+  "homepage": "https://chenu.io/docs/decor"
+}

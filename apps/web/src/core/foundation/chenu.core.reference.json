@@ -1,0 +1,195 @@
+{
+  "CHE_NU_CORE_REFERENCE_VERSION": "1.0",
+  "STATUS": "FOUNDATION_FREEZE",
+
+  "PURPOSE": {
+    "description": "CHE·NU defines immutable foundations for human + AI cognition.",
+    "systemNature": "cognitive_operating_system",
+    "notAProduct": true
+  },
+
+  "PHILOSOPHY": {
+    "existsTo": [
+      "expand_human_capability",
+      "reduce_confusion",
+      "preserve_responsibility",
+      "make_complexity_navigable"
+    ],
+    "doesNotExistTo": [
+      "optimize_humans",
+      "replace_human_judgment",
+      "automate_authority",
+      "hide_decision_paths"
+    ],
+    "explainabilityRequired": true
+  },
+
+  "ABSOLUTE_LAWS": {
+    "LAW_1_HUMAN_AUTHORITY": {
+      "description": "Only humans validate and commit decisions.",
+      "aiMay": ["analyze", "observe", "propose", "document"],
+      "aiMayNot": ["finalize_decisions", "commit_timeline"]
+    },
+
+    "LAW_2_PARALLEL_VS_CHAIN": {
+      "parallelAllowedFor": [
+        "exploration",
+        "analysis",
+        "comparison",
+        "recall",
+        "methodology_observation"
+      ],
+      "chainRequiredFor": [
+        "decisions",
+        "validation",
+        "timeline_commit",
+        "irreversible_actions"
+      ],
+      "responsibilityParallelForbidden": true
+    },
+
+    "LAW_3_NO_INVISIBLE_ACTION": {
+      "silentExecution": false,
+      "hiddenStateChange": false,
+      "automaticTimelineWrite": false
+    },
+
+    "LAW_4_READ_ONLY_LEARNING": {
+      "replay": "read_only",
+      "insights": "observational",
+      "learningCannot": [
+        "mutate_past",
+        "enforce_future",
+        "rewrite_timeline"
+      ]
+    },
+
+    "LAW_5_THEMES_ARE_VISUAL_ONLY": {
+      "themesAffect": ["perception", "visual_language"],
+      "themesDoNotAffect": [
+        "logic",
+        "authority",
+        "agents",
+        "timeline"
+      ]
+    }
+  },
+
+  "SYSTEM_ARCHITECTURE": {
+    "model": "living_tree",
+    "components": {
+      "trunk": ["laws", "governance", "authority"],
+      "roots": ["memory", "timeline", "identity"],
+      "spheres": "domains_of_life",
+      "branches": ["projects", "workflows", "contexts"],
+      "leaves": ["tasks", "meetings", "decisions"]
+    },
+    "bypassTrunkForbidden": true
+  },
+
+  "AGENT_MODEL": {
+    "agentsAre": "tools",
+    "agentRoles": [
+      "observer",
+      "analyst",
+      "advisor",
+      "documenter"
+    ],
+    "forbiddenCapabilities": [
+      "decision_enforcement",
+      "guard_bypass",
+      "self_prioritization",
+      "hidden_memory_writes"
+    ],
+    "specialAgents": {
+      "orchestrator": "coordination_only",
+      "decision_analyst": "clarification_only",
+      "human": "final_authority"
+    }
+  },
+
+  "PARALLEL_CHAIN_RULE": {
+    "parallelThinking": true,
+    "chainedResponsibility": true,
+    "exceptions": "none"
+  },
+
+  "MEETINGS_AND_XR": {
+    "meetingsPurpose": "structured_decision_spaces",
+    "xrIs": "perceptual_extension_only",
+    "xrDoesNotGrant": [
+      "additional_authority",
+      "logic_execution"
+    ]
+  },
+
+  "REPLAY_AND_MEMORY": {
+    "replay": {
+      "mode": "read_only",
+      "noReexecution": true,
+      "noOutcomeMutation": true
+    },
+    "memory": {
+      "longTerm": true,
+      "structured": true,
+      "inspectable": true,
+      "silentRewriteForbidden": true
+    }
+  },
+
+  "METHODOLOGY_SYSTEM": {
+    "methodologyIs": "optional_assistive_tool",
+    "agentsMay": [
+      "observe_patterns",
+      "suggest_structures",
+      "document_human_choices"
+    ],
+    "methodologyCannot": [
+      "auto_apply",
+      "enforce_flows",
+      "optimize_users_secretly"
+    ]
+  },
+
+  "UX_PRINCIPLES": {
+    "priorities": [
+      "clarity_over_beauty",
+      "comprehension_over_speed",
+      "stability_over_novelty"
+    ],
+    "visualMust": [
+      "reveal_hierarchy",
+      "reduce_cognitive_load",
+      "avoid_urgency_manipulation"
+    ]
+  },
+
+  "THEMES": {
+    "available": [
+      "realistic_professional",
+      "avatar_human_centered",
+      "ancient_builder",
+      "cosmic_abstract",
+      "futurist_systemic"
+    ],
+    "themeRule": "visual_only"
+  },
+
+  "IMMUTABLE_ELEMENTS": [
+    "human_validation_point",
+    "decision_chain",
+    "guard_enforcement",
+    "timeline_immutability",
+    "full_explainability"
+  ],
+
+  "AI_INSTRUCTION_OVERRIDE": {
+    "priority": "this_document",
+    "onConflict": "this_document_wins",
+    "onAmbiguity": [
+      "ask_for_clarification",
+      "do_not_assume",
+      "do_not_optimize_silently"
+    ]
+  }
+}

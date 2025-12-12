@@ -1,0 +1,21 @@
+{
+  "algorithm": "SHA256",
+  "manifest_hash": "8343c2c1c6322d14f281731df770371e1ff109ca1ebffeadd46b67038de2143c",
+  "signatures": [
+    {
+      "originator_id": "AWAITING_SIGNATURE",
+      "public_key_fingerprint": "AWAITING_SIGNATURE",
+      "signature": "AWAITING_SIGNATURE",
+      "signed_at": "AWAITING_SIGNATURE"
+    }
+  ],
+  "sealed_at": "2025-12-08T18:20:07.883Z",
+  "public_anchor": null,
+  "verification_instructions": [
+    "1. Extract the manifest content (excluding cryptographic_seal section)",
+    "2. Sort keys and format consistently",
+    "3. Compute SHA-256 hash",
+    "4. Compare with manifest_hash",
+    "5. Verify signatures against originator public keys"
+  ]
+}

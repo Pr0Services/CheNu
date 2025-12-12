@@ -1,0 +1,9 @@
+{
+  "name": "@chenu/knowledge-threads-mega",
+  "version": "1.0.0",
+  "description": "CHE·NU Knowledge Threads MEGA - 7 Thread Types + Triple-Layer + TQL + Safe Learning + 5 Agents",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": ["chenu", "knowledge-threads", "mega", "7-types", "5-agents", "tql", "safe-learning"],
+  "license": "MIT"
+}

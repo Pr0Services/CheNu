@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: chenu_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - chenu_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api_service:
+    build: ./backend
+    container_name: chenu_api
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  orchestrator_llm:
+    build: ./orchestrator
+    container_name: chenu_orchestrator
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - SYSTEM_PROMPT=ULTRA_PACK
+      - MULTIPLEX_ENABLED=true
+      - SELF_HEALING_ENABLED=true
+    depends_on:
+      - api_service
+
+  front_ui:
+    build: ./frontend
+    container_name: chenu_front
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api_service
+
+  xr_gateway:
+    build: ./xr-gateway
+    container_name: chenu_xr_gateway
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8081:8081"
+    depends_on:
+      - api_service
+
+volumes:
+  chenu_db_data:

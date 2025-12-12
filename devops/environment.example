@@ -1,0 +1,25 @@
+# CHE·NU Environment Variables
+
+# Database
+DB_USER=chenu
+DB_PASSWORD=your_secure_password
+DB_NAME=chenu_db
+DATABASE_URL=postgresql://chenu:your_secure_password@db:5432/chenu_db
+
+# API
+PORT=8080
+CORS_ORIGIN=http://localhost:3000
+
+# LLM
+OPENAI_API_KEY=sk-your-key-here
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+
+# CHE·NU System
+SYSTEM_PROMPT=ULTRA_PACK
+MULTIPLEX_ENABLED=true
+SELF_HEALING_ENABLED=true
+LAWBOOK_ENFORCED=true
+
+# XR Gateway
+XR_PORT=8081
+XR_LATENCY_TARGET_MS=20

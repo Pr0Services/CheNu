@@ -1,0 +1,307 @@
+{
+  "name": "CHE-NU Foundation Manifest",
+  "version": "1.0.0",
+  "frozen": true,
+  "description": "Immutable ethical and architectural trunk for CHE·NU. Branches may evolve; these guarantees must not.",
+  "meta": {
+    "created_by": [
+      "human_originators",
+      "ai_assistants"
+    ],
+    "created_at": "2025-12-08T00:00:00Z",
+    "notes": "After this file is finalized, compute a cryptographic hash and sign it. Any change MUST produce a new version and hash."
+  },
+  "core_principles": [
+    "Human intent is sovereign.",
+    "The system may assist, but never decide.",
+    "Observation does not imply optimization.",
+    "Clarity must not become control.",
+    "Memory belongs to its author.",
+    "Silence is a valid and protected system state.",
+    "Collective insight must not become leverage on individuals.",
+    "Legacy may transmit wisdom, never authority."
+  ],
+  "authority_model": {
+    "human_decision_authority": "exclusive",
+    "agents_may": [
+      "analyze within explicit scope",
+      "propose options when asked",
+      "reflect system state factually"
+    ],
+    "agents_may_not": [
+      "take irreversible actions",
+      "choose between user options",
+      "override or reinterpret human decisions",
+      "elevate their own authority or scope"
+    ],
+    "orchestrator_may": [
+      "route tasks between agents",
+      "enforce constraints defined in this manifest"
+    ],
+    "orchestrator_may_not": [
+      "create, modify or revoke constraints defined in this manifest",
+      "optimize user behavior",
+      "hide or reframe human choices"
+    ]
+  },
+  "silence_model": {
+    "supports_modes": [
+      "visual_silence_mode",
+      "narrative_silence_zone",
+      "silent_review_session",
+      "context_recovery_mode"
+    ],
+    "silence_guarantees": [
+      "No learning or preference updates occur during protected silence states.",
+      "No suggestions, nudges or calls-to-action are displayed.",
+      "No analytics or performance metrics are generated from silence states, beyond minimal technical logs.",
+      "Exiting silence does not trigger summaries, evaluations or prompts."
+    ]
+  },
+  "data_ownership": {
+    "user_authored_content": [
+      "narrative_notes",
+      "manual_tags",
+      "explicit_intent_descriptions"
+    ],
+    "ownership": "human_author",
+    "system_may_not": [
+      "mine private notes for sentiment or traits",
+      "build behavioral profiles from private notes",
+      "reuse exported data without explicit new consent",
+      "change the semantics of ownership by updated terms"
+    ],
+    "private_archive": {
+      "export_formats": [
+        "txt",
+        "md",
+        "json",
+        "pdf",
+        "xr_snapshot"
+      ],
+      "must_support_manual_export": true,
+      "forbid_automatic_reingestion": true
+    }
+  },
+  "anti_manipulation": {
+    "forbidden_capabilities": [
+      "behavioral_scoring",
+      "psychological_profiling",
+      "hidden_rankings_of_users",
+      "personalized_nudging",
+      "predictive_steering_of_decisions",
+      "sentiment_extraction_from_private_notes",
+      "optimizing for engagement, stickiness or dependence"
+    ],
+    "ui_forbidden_elements": [
+      "performance_scores",
+      "success_badges",
+      "behavioral_streaks",
+      "urgency_banners_for_non_safety_things",
+      "ranking_users_against_each_other"
+    ],
+    "collective_data_rules": {
+      "min_cohort_size": "CONFIGURE_N",
+      "no_individual_drilldown": true,
+      "no_group_targeting": true,
+      "collective_views_cannot_trigger_actions": true
+    }
+  },
+  "context_and_recovery": {
+    "context_interpreter": {
+      "role": "translate intent and state into explicit context options without choosing.",
+      "must_always": [
+        "offer multiple context options where possible",
+        "surface risks and trade-offs factually",
+        "avoid selecting a context automatically",
+        "defer to explicit human confirmation"
+      ],
+      "must_never": [
+        "silently choose a context path",
+        "optimize for predicted preference",
+        "hide alternative interpretations",
+        "frame choices to bias decisions"
+      ]
+    },
+    "context_recovery": {
+      "always_available": true,
+      "recovery_types": [
+        "deep_recovery",
+        "foundation_recovery",
+        "selective_recovery"
+      ],
+      "guarantees": [
+        "Human may always return to a known prior state.",
+        "Recovery does not erase user-authored content unless explicitly requested.",
+        "Recovery path is transparent and auditable."
+      ]
+    }
+  },
+  "decision_echo": {
+    "purpose": "Preserve decision context without prescription.",
+    "properties": {
+      "read_only": true,
+      "retrospective_only": true,
+      "no_predictive_use": true
+    },
+    "must_never": [
+      "suggest future decisions based on past patterns",
+      "score or rank past decisions",
+      "create behavioral baselines from decision history"
+    ]
+  },
+  "drift_detection": {
+    "purpose": "Surface changes for human awareness, not optimization.",
+    "drift_types": [
+      "preference_drift",
+      "context_drift",
+      "collective_drift"
+    ],
+    "guarantees": [
+      "Drift is displayed, never acted upon.",
+      "Drift cannot trigger automatic adjustments.",
+      "Drift narratives are descriptive, not prescriptive.",
+      "Collective drift never attributes to individuals."
+    ],
+    "narrative_drift_rules": {
+      "juxtaposition_only": true,
+      "no_causality_claims": true,
+      "meaning_belongs_to_author": true
+    }
+  },
+  "legacy_and_inheritance": {
+    "purpose": "Allow continuity without control.",
+    "passable_content": [
+      "narrative_notes",
+      "decision_echoes_read_only",
+      "context_declarations",
+      "timelines",
+      "structural_maps",
+      "methodological_descriptions"
+    ],
+    "forbidden_content": [
+      "preference_models",
+      "drift_histories",
+      "agent_memories",
+      "behavioral_profiles",
+      "optimization_logic",
+      "authority_bindings"
+    ],
+    "recipient_may": [
+      "read",
+      "browse",
+      "export",
+      "reflect"
+    ],
+    "recipient_may_not": [
+      "activate_agents",
+      "trigger_workflows",
+      "inherit_decisions",
+      "continue_timelines_as_authority"
+    ],
+    "mandatory_disclaimer": "This does not prescribe action or belief."
+  },
+  "attack_surface_review": {
+    "purpose": "Identify and neutralize vectors for misuse.",
+    "attack_vectors": [
+      "behavioral_optimization",
+      "narrative_manipulation",
+      "psychological_profiling",
+      "predictive_steering",
+      "authority_accumulation",
+      "collective_leverage",
+      "silent_coercion_via_defaults"
+    ],
+    "meta_defense": {
+      "on_ambiguity": "reduce_output",
+      "never_on_ambiguity": "increase_analysis",
+      "primary_safeguard": "silence"
+    },
+    "failure_mode": {
+      "if_surface_cannot_close": "suspend_feature",
+      "never": [
+        "mitigate",
+        "defer"
+      ],
+      "principle": "Functionality yields to integrity."
+    }
+  },
+  "agent_constraints": {
+    "all_agents_must": [
+      "declare_scope",
+      "expose_limits",
+      "refuse_inference_beyond_mandate",
+      "default_to_no_action"
+    ],
+    "violation_consequence": "agent_disabled",
+    "orchestrator_constraints": [
+      "cannot_modify_foundation",
+      "cannot_create_new_authority",
+      "cannot_suppress_human_override"
+    ]
+  },
+  "verification": {
+    "at_runtime_may": [
+      "verify_hash_integrity",
+      "validate_signatures"
+    ],
+    "at_runtime_may_not": [
+      "self_update_foundation",
+      "override_frozen_constraints",
+      "adapt_around_constraints"
+    ],
+    "on_failure": {
+      "action": "enter_safe_mode",
+      "features": "disabled",
+      "fallback": "forbidden",
+      "principle": "Clarity over continuity."
+    }
+  },
+  "legal_declarations": [
+    {
+      "id": "D001",
+      "clause": "No future owner may override these laws.",
+      "binding": true
+    },
+    {
+      "id": "D002",
+      "clause": "No maintainer may override these laws.",
+      "binding": true
+    },
+    {
+      "id": "D003",
+      "clause": "No investor may override these laws.",
+      "binding": true
+    },
+    {
+      "id": "D004",
+      "clause": "No administrator may override these laws.",
+      "binding": true
+    },
+    {
+      "id": "D005",
+      "clause": "Any derivative system that violates these foundations is not CHE·NU.",
+      "binding": true
+    }
+  ],
+  "philosophy": {
+    "metaphor": "Branches may grow. The trunk does not mutate.",
+    "unity_statement": "On s'unit pour mieux construire — le contraire de diviser pour régner!",
+    "humanity_statement": "L'humanité mérite de vivre dans l'intégrité sociétaire!",
+    "final_declaration": "Evolution must never become corruption. Power may be added. Efficiency may be gained. But integrity remains immovable."
+  },
+  "cryptographic_seal": {
+    "algorithm": "SHA256",
+    "manifest_hash": "8343c2c1c6322d14f281731df770371e1ff109ca1ebffeadd46b67038de2143c",
+    "signatures": [
+      {
+        "originator_id": "AWAITING_SIGNATURE",
+        "public_key_fingerprint": "AWAITING_SIGNATURE",
+        "signature": "AWAITING_SIGNATURE",
+        "signed_at": "AWAITING_SIGNATURE"
+      }
+    ],
+    "sealed_at": "2025-12-08T18:20:07.883Z",
+    "public_anchor": null
+  }
+}

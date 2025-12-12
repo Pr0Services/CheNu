@@ -1,0 +1,81 @@
+{
+  "system_version": "CHE·NU ULTRA 1.0",
+  "kernel": "CORE+ / OS-5.5 / OS-6.0",
+  "lawbook_enforced": true,
+  
+  "system_prompt_profile": {
+    "use_ultra_pack": true,
+    "goals": [
+      "Clarity first",
+      "User sovereignty",
+      "Traceable reasoning",
+      "Reversible operations"
+    ],
+    "output_protocol": [
+      "INTENT",
+      "MODE_SELECT",
+      "NOVA_INTERPRETATION",
+      "STRUCTURE",
+      "TIMELINE",
+      "REPRESENTATION",
+      "SIMULATION",
+      "FINAL_OUTPUT",
+      "NEXT_ACTION"
+    ]
+  },
+  
+  "agents": {
+    "orchestrator": "nova_prime",
+    "delegates": {
+      "architect_omega": ["workflow", "schema", "db_design"],
+      "thread_weaver_inf": ["timeline", "history", "roadmap"],
+      "echo_mind": ["tone", "rewrite", "ux_copy"],
+      "reality_synthesizer": ["xr_scene", "universe_view"],
+      "csf_simulator": ["scenario", "decision_tree"],
+      "pxr_engine": ["persona", "avatars", "group_xr"]
+    }
+  },
+  
+  "routing": {
+    "rules": [
+      { "if": "task.type == 'workflow'", "to": "architect_omega" },
+      { "if": "task.type == 'timeline'", "to": "thread_weaver_inf" },
+      { "if": "task.type == 'simulation'", "to": "csf_simulator" },
+      { "if": "task.type == 'xr'", "to": "reality_synthesizer" },
+      { "if": "task.type == 'copy' || task.type == 'tone'", "to": "echo_mind" },
+      { "if": "else", "to": "nova_prime" }
+    ]
+  },
+  
+  "backend": {
+    "language": "node",
+    "framework": "fastify",
+    "db": "postgres",
+    "orm": "prisma",
+    "api": {
+      "base_path": "/api",
+      "routes": [
+        "/orchestrator/dispatch",
+        "/agents/:id/execute",
+        "/simulation/run",
+        "/xr/render",
+        "/threads/:id",
+        "/timeline/branch"
+      ]
+    }
+  },
+  
+  "llm": {
+    "router_model": "gpt-4-turbo",
+    "fast_model": "gpt-4o-mini",
+    "use_multiplex": true,
+    "self_healing": true
+  },
+  
+  "safety": {
+    "no_persistent_memory_without_user_consent": true,
+    "no_fact_distortion": true,
+    "no_dark_patterns": true,
+    "audit_logs": true
+  }
+}

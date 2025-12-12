@@ -1,0 +1,69 @@
+{
+  "id": "creative",
+  "name": "Creative Studio",
+  "type": "creative",
+  
+  "visual": {
+    "baseShape": "organic",
+    "color": {
+      "primary": "#8B2942",
+      "secondary": "#A83A5A",
+      "accent": "#FF6B8A",
+      "gradient": ["#8B2942", "#D4527A", "#FF8FA3"]
+    },
+    "growthAxis": "radial",
+    "icon": "🎨",
+    "glow": {
+      "enabled": true,
+      "intensity": 0.4,
+      "color": "#FF6B8A"
+    }
+  },
+  
+  "layout": {
+    "defaultDimension": "L",
+    "minDimension": "M",
+    "maxDimension": "XL",
+    "childArrangement": "organic",
+    "expansionDirection": "radial"
+  },
+  
+  "priority": ["assets", "experiments", "iterations", "showcase"],
+  
+  "permissions": {
+    "default": ["read", "preview"],
+    "member": ["read", "comment", "fork"],
+    "contributor": ["read", "write", "publish"],
+    "owner": ["read", "write", "publish", "delete", "configure"]
+  },
+  
+  "content": {
+    "sections": [
+      { "id": "assets", "label": "Assets", "icon": "🖼️", "order": 1 },
+      { "id": "experiments", "label": "Experiments", "icon": "🧪", "order": 2 },
+      { "id": "iterations", "label": "Iterations", "icon": "🔄", "order": 3 },
+      { "id": "showcase", "label": "Showcase", "icon": "✨", "order": 4 }
+    ],
+    "defaultView": "assets"
+  },
+  
+  "agents": {
+    "roles": ["art-director", "writer-ai", "video-producer", "designer", "brand-manager"],
+    "maxVisible": 7,
+    "arrangement": "orbital"
+  },
+  
+  "behavior": {
+    "onFocus": { "scale": 1.15, "showDetails": true, "bloom": true },
+    "onEnter": { "transition": "expand-radial", "duration": 500 },
+    "onIdle": { "animation": "breathe", "dimAfter": 60000 },
+    "onActive": { "animation": "glow", "highlight": true, "particles": true }
+  },
+  
+  "rules": {
+    "sizeByContent": true,
+    "motionByActivity": true,
+    "visibilityByPermission": true,
+    "allowExperimentation": true
+  }
+}

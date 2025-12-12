@@ -1,0 +1,132 @@
+# =====================================================
+# CHE·NU — SPHERE SCHEMA
+# Status: FOUNDATIONAL
+# Purpose: Structural template for all sphere definitions
+#
+# Every sphere in CHE·NU must conform to this schema.
+# The schema enforces inheritance of global laws,
+# privacy guarantees, and human sovereignty.
+#
+# No sphere may override foundational protections.
+#
+# ❤️ With love, for humanity.
+# =====================================================
+
+sphere:
+  name: "<SPHERE_NAME>"
+  id: "<unique_slug>"
+  emoji: "<emoji>"
+  description: "<human-readable purpose>"
+  version: "1.0.0"
+
+# ===========================================
+# INHERITANCE
+# Spheres inherit from global foundations
+# ===========================================
+inherits:
+  foundation: true          # Tree Laws, Core Constitution
+  privacy: true             # Privacy guarantees apply
+  global_structural_laws: true
+  silence_modes: true       # All silence modes available
+
+# ===========================================
+# CONTEXT ISOLATION
+# Spheres are isolated by default
+# ===========================================
+context:
+  isolated_by_default: true
+  requires_explicit_bridge: true
+  bridge_types:
+    - "manual_reference"       # User explicitly references
+    - "explicit_user_action"   # User explicitly bridges
+
+# ===========================================
+# TIME
+# Each sphere has its own timeline
+# ===========================================
+time:
+  local_timeline: true
+  states:
+    - active      # Currently in use
+    - dormant     # Not active, preserved
+    - archived    # Long-term storage
+  no_global_pressure: true   # No urgency from system
+
+# ===========================================
+# AGENTS
+# Agent capabilities within sphere
+# ===========================================
+agents:
+  allowed: true
+  scope_limited: true        # Cannot exceed sphere bounds
+  can_create_subagents: true
+  forbidden_capabilities:
+    - profiling              # No user profiling
+    - implicit_memory        # No hidden learning
+    - cross_sphere_observation  # No cross-sphere spying
+
+# ===========================================
+# DATA SOVEREIGNTY
+# Human owns all data
+# ===========================================
+data:
+  ownership: "human"
+  private_by_default: true
+  exportable: true           # Always exportable
+  deletable_without_justification: true  # No friction
+
+# ===========================================
+# SILENCE MODES
+# Spaces for human reflection
+# ===========================================
+silence_modes:
+  available:
+    - context_recovery       # Restore from confusion
+    - visual_silence         # Minimal visual noise
+    - silent_review          # Review without AI input
+  behavior_during_silence:
+    learning: false          # No learning during silence
+    suggestion: false        # No suggestions
+    analytics: "minimal"     # Minimal tracking only
+
+# ===========================================
+# UX PRINCIPLES
+# Human-centered interface
+# ===========================================
+ux:
+  default_state: "minimal"   # Start simple
+  progressive_disclosure: true  # Reveal as needed
+  no_urgency_patterns: true  # No fake urgency
+  no_performance_indicators: true  # No gamification
+
+# ===========================================
+# REVERSIBILITY
+# All actions can be undone
+# ===========================================
+reversibility:
+  enabled: true
+  reversible_actions:
+    - agent_creation
+    - workflow_change
+    - structure_edit
+  irreversible_only_with_consent: true  # Explicit consent required
+
+# ===========================================
+# INTERACTIONS
+# Cross-sphere communication
+# ===========================================
+interactions:
+  allowed: true
+  requires_explicit_user_action: true  # User must initiate
+  no_automatic_sync: true    # No background sync
+
+# ===========================================
+# VALIDATION
+# Compliance with global laws
+# ===========================================
+validation:
+  respects_all_global_laws: true
+  no_privacy_violation: true
+  no_behavioral_optimization: true
+  reversible_by_default: true
+  approved_by_human: true

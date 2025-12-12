@@ -1,0 +1,490 @@
+# ============================================================
+# CHE·NU ULTRA PACK — PRODUCTION DEPLOYMENT CONFIGURATION
+# Version: ULTRA-6.0-prod
+# ============================================================
+
+# ============================================================
+# SECTION 1: SYSTEM CORE
+# ============================================================
+SYSTEM_CORE:
+  engine: "CHE·NU ULTRA PACK v1.0"
+  kernel: "CORE+ + OS 5.5 + OS 6.0"
+  constraint: "Respect strict du LAWBOOK"
+  mode_selection: "Auto (Nova Prime)"
+  healing: true
+  multiplex: true
+  reversible: true
+  
+  modules_active:
+    - CORE_PLUS          # Unified canonical kernel
+    - OS_5_5             # Self-healing
+    - OS_6_0             # Multiplex reasoning
+    - RDK                # Reality Distortion Kernel
+    - CSF                # Conceptual Simulation Fabric
+    - PXR_1              # Persona Engine
+    - PXR_2              # Group Dynamics Engine
+
+# ============================================================
+# SECTION 2: OUTPUT FORMAT PIPELINE
+# ============================================================
+OUTPUT_FORMAT:
+  pipeline:
+    1_INTENT: "Nova Prime intent interpretation"
+    2_MODE_SELECT: "Auto-select optimal mode"
+    3_NOVA_INTERPRETATION: "Multi-nuance parsing"
+    4_STRUCTURE: "Architect Ω structuring"
+    5_TIMELINE: "Thread Weaver ∞ temporal links"
+    6_REPRESENTATION: "RDK representation transform"
+    7_SIMULATION: "CSF conceptual simulation"
+    8_FINAL_OUTPUT: "CORE+ unified output"
+    9_NEXT_ACTION: "Suggested next steps"
+  
+  constraints:
+    - clarity_first: true
+    - reversible: true
+    - lawbook_validated: true
+    - self_healed: true
+
+# ============================================================
+# SECTION 3: BACKEND STACK
+# ============================================================
+BACKEND_STACK:
+  runtime:
+    language: "Node.js"
+    version: ">=20.x"
+    package_manager: "pnpm"
+  
+  api:
+    framework: "Fastify"
+    version: "^4.x"
+    openapi: true
+    swagger_ui: true
+    cors: true
+    rate_limiting: true
+  
+  database:
+    type: "PostgreSQL"
+    version: ">=15"
+    orm: "Prisma"
+    prisma_version: "^5.x"
+    connection_pool: 20
+    ssl: true
+  
+  cache:
+    type: "Redis"
+    version: ">=7"
+    ttl_default: 3600
+
+# ============================================================
+# SECTION 4: DATABASE MODEL
+# ============================================================
+DATABASE_MODEL:
+  tables:
+    # Core entities
+    - name: users
+      description: "User accounts and profiles"
+      
+    - name: spheres
+      description: "CHE·NU spheres (11 domains)"
+      
+    - name: items
+      description: "Generic items across spheres"
+      
+    - name: tasks
+      description: "User and system tasks"
+      
+    - name: decisions
+      description: "Decision nodes and branches"
+      
+    - name: threads
+      description: "Knowledge threads (PKT, CKT, ISKT)"
+      
+    - name: events
+      description: "Timeline events"
+      
+    # Agent system
+    - name: agents
+      description: "168 agents registry"
+      
+    - name: executions
+      description: "Agent execution logs"
+      
+    # XR system
+    - name: xr_spaces
+      description: "XR rooms and environments"
+      
+    - name: portals
+      description: "Sphere navigation portals"
+      
+    - name: persona_states
+      description: "PXR avatar states"
+
+# ============================================================
+# SECTION 5: API ENDPOINTS
+# ============================================================
+API_ENDPOINTS:
+  orchestrator:
+    - method: POST
+      path: /orchestrator/dispatch
+      description: "Main entry point - routes to agents"
+      auth: required
+      
+  agents:
+    - method: POST
+      path: /agents/:id/execute
+      description: "Execute specific agent"
+      auth: required
+      
+    - method: GET
+      path: /agents
+      description: "List all available agents"
+      auth: required
+      
+  simulation:
+    - method: POST
+      path: /simulation/run
+      description: "Run CSF conceptual simulation"
+      auth: required
+      sandbox: true
+      
+  xr:
+    - method: POST
+      path: /xr/render
+      description: "Render XR scene from state"
+      auth: required
+      
+    - method: GET
+      path: /xr/rooms
+      description: "List available XR rooms"
+      auth: required
+      
+  threads:
+    - method: GET
+      path: /threads/:id
+      description: "Get thread by ID"
+      auth: required
+      
+    - method: POST
+      path: /threads
+      description: "Create new thread"
+      auth: required
+      
+  timeline:
+    - method: POST
+      path: /timeline/branch
+      description: "Create timeline branch"
+      auth: required
+      
+    - method: GET
+      path: /timeline/:id
+      description: "Get timeline state"
+      auth: required
+
+# ============================================================
+# SECTION 6: LANGCHAIN SETUP
+# ============================================================
+LANGCHAIN_SETUP:
+  llm:
+    provider: "ChatOpenAI"
+    model: "gpt-4-turbo-preview"
+    temperature: 0.7
+    max_tokens: 4096
+    system_prompt: "ULTRA_PACK"
+    
+  chains:
+    router:
+      type: "RouterChain"
+      routes:
+        - task_analysis
+        - structure_generation
+        - simulation_run
+        - xr_render
+        - thread_operation
+        
+    tools:
+      type: "ToolChains"
+      agents:
+        - nova_prime
+        - architect_omega
+        - thread_weaver
+        - echomind
+        - reality_synthesizer
+        
+  memory:
+    type: "episodic"
+    user_controlled: true
+    persistence: "opt-in only"
+    
+  callbacks:
+    - execution_logger
+    - decision_tracker
+    - lawbook_validator
+
+# ============================================================
+# SECTION 7: CREWAI SETUP
+# ============================================================
+CREWAI_SETUP:
+  crew:
+    name: "CHE·NU Core Crew"
+    orchestrator: "Nova Prime"
+    
+  agents:
+    - id: nova_prime
+      role: "Intent Interpreter"
+      goal: "Parse and route user intent"
+      
+    - id: architect_omega
+      role: "Structure Builder"
+      goal: "Create optimal hierarchies"
+      
+    - id: thread_weaver
+      role: "Timeline Manager"
+      goal: "Manage temporal context"
+      
+    - id: echomind
+      role: "Tone Regulator"
+      goal: "Ensure emotional neutrality"
+      
+    - id: reality_synthesizer
+      role: "XR Mapper"
+      goal: "Generate spatial representations"
+      
+    - id: csf_engine
+      role: "Simulation Controller"
+      goal: "Run conceptual simulations"
+      
+    - id: stability_guard
+      role: "Coherence Checker"
+      goal: "Detect and heal contradictions"
+      
+  memory:
+    shared: false  # LAWBOOK compliance
+    
+  process:
+    type: "hierarchical"
+    manager: "nova_prime"
+
+# ============================================================
+# SECTION 8: TOKEN OPTIMIZATION
+# ============================================================
+TOKEN_OPTIMIZATION:
+  strategies:
+    multiplex:
+      enabled: true
+      condition: "complex_tasks_only"
+      
+    compression:
+      enabled: true
+      engine: "CORE+"
+      
+    healing:
+      enabled: true
+      stage: "pre-output"
+      
+  limits:
+    max_tokens_per_request: 8192
+    max_context_window: 128000
+    
+  caching:
+    enabled: true
+    strategy: "semantic_similarity"
+    ttl: 3600
+
+# ============================================================
+# SECTION 9: DEPLOYMENT
+# ============================================================
+DEPLOYMENT:
+  environments:
+    - name: dev
+      replicas: 1
+      resources:
+        cpu: "500m"
+        memory: "1Gi"
+        
+    - name: staging
+      replicas: 2
+      resources:
+        cpu: "1"
+        memory: "2Gi"
+        
+    - name: prod
+      replicas: 3
+      resources:
+        cpu: "2"
+        memory: "4Gi"
+        auto_scaling:
+          min: 3
+          max: 10
+          target_cpu: 70
+          
+  containers:
+    - name: api_service
+      image: "chenu/api:latest"
+      port: 3000
+      health_check: "/health"
+      
+    - name: orchestrator_llm
+      image: "chenu/orchestrator:latest"
+      port: 3001
+      gpu: optional
+      
+    - name: vector_db
+      image: "pgvector/pgvector:pg15"
+      port: 5432
+      optional: true
+      
+    - name: front_ui
+      image: "chenu/frontend:latest"
+      port: 80
+      
+    - name: xr_gateway
+      image: "chenu/xr-gateway:latest"
+      port: 8080
+      websocket: true
+
+# ============================================================
+# SECTION 10: SECURITY RULES (LAWBOOK)
+# ============================================================
+SECURITY_RULES:
+  lawbook_compliance:
+    - rule: "No memory persistence unless user grants permission"
+      enforcement: strict
+      
+    - rule: "Strip PII before logging"
+      enforcement: strict
+      
+    - rule: "All logs anonymized"
+      enforcement: strict
+      
+    - rule: "RDK/CSF sandbox (no real-world predictions)"
+      enforcement: strict
+      
+    - rule: "LAWBOOK overrides all modules"
+      enforcement: absolute
+      
+  authentication:
+    type: "JWT"
+    expiry: 3600
+    refresh: true
+    
+  authorization:
+    type: "RBAC"
+    roles:
+      - admin
+      - user
+      - agent
+      - system
+      
+  encryption:
+    at_rest: "AES-256"
+    in_transit: "TLS 1.3"
+
+# ============================================================
+# SECTION 11: OBSERVABILITY
+# ============================================================
+OBSERVABILITY:
+  logging:
+    - type: "execution_logs"
+      per: "agent"
+      retention: "30 days"
+      
+    - type: "decision_trees"
+      per: "request"
+      retention: "90 days"
+      
+  health_checks:
+    - endpoint: "/health"
+      interval: "30s"
+      
+    - endpoint: "/ready"
+      interval: "10s"
+      
+  metrics:
+    - name: "incoherence_spikes"
+      description: "Triggers OS 5.5 healing"
+      threshold: 0.3
+      action: "self_heal"
+      
+    - name: "latency_p99"
+      description: "99th percentile latency"
+      threshold: "500ms"
+      
+  tracing:
+    enabled: true
+    provider: "OpenTelemetry"
+    sampling_rate: 0.1
+
+# ============================================================
+# SECTION 12: XR RUNTIME
+# ============================================================
+XR_RUNTIME:
+  gateway:
+    supported:
+      - "Unity"
+      - "Unreal Engine"
+      - "WebXR"
+      
+  format:
+    scenes: "JSON"
+    avatars: "PXR Encoder"
+    rooms: "CHE·NU XR Schema"
+    
+  performance:
+    latency_target: "< 20ms"
+    frame_rate: 90
+    
+  rooms:
+    - decision_chamber
+    - collaboration_sphere
+    - brainstorm_arena
+    - review_theater
+    - negotiation_bridge
+    - simulation_hall
+
+# ============================================================
+# SECTION 13: FAILSAFE MODES
+# ============================================================
+FAILSAFE_MODES:
+  mode_recovery:
+    triggers:
+      - incoherence_detected
+      - pipeline_failure
+      - timeout
+      
+    actions:
+      - step: "recompile_kernel"
+        engine: "OS 5.x"
+        
+      - step: "apply_self_healing"
+        engine: "OS 5.5"
+        
+      - step: "fallback_minimal"
+        condition: "recovery_failed"
+        
+  mode_minimal:
+    description: "Emergency minimal mode"
+    disabled:
+      - XR
+      - CSF
+      - Multiplex
+    enabled:
+      - basic_reasoning
+      - text_output
+      - lawbook_validation
+
+# ============================================================
+# SECTION 14: VERSIONING
+# ============================================================
+VERSIONING:
+  system:
+    name: "CHE·NU ULTRA PACK"
+    version: "1.0.0"
+    kernel: "CORE+ + OS 5.5 + OS 6.0"
+    
+  api:
+    version: "v1"
+    prefix: "/api/v1"
+    
+  compatibility:
+    min_client_version: "1.0.0"
+    breaking_changes: false

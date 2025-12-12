@@ -1,0 +1,421 @@
+/* ============================================================
+   CHE·NU Design System — CSS Variables
+   Version: 1.0-canonical
+   ============================================================ */
+
+:root {
+  /* --------------------------------------------------------
+     BASE COLORS
+     -------------------------------------------------------- */
+  --chenu-bg: #0A0B0D;
+  --chenu-bg-dark: #050507;
+  --chenu-surface: #1A1C20;
+  --chenu-elevated: #22252B;
+  --chenu-stroke: #2C2F33;
+  --chenu-stroke-light: rgba(255, 255, 255, 0.05);
+  
+  /* --------------------------------------------------------
+     TEXT COLORS
+     -------------------------------------------------------- */
+  --chenu-text-primary: #FFFFFF;
+  --chenu-text-secondary: #C8C8C8;
+  --chenu-text-muted: #888888;
+  --chenu-text-disabled: #555555;
+  
+  /* --------------------------------------------------------
+     SEMANTIC COLORS
+     -------------------------------------------------------- */
+  --chenu-info: #5BA9FF;
+  --chenu-success: #6FE8A3;
+  --chenu-warning: #FFBE55;
+  --chenu-error: #FF5A5A;
+  
+  /* --------------------------------------------------------
+     SPHERE COLORS
+     -------------------------------------------------------- */
+  --chenu-sphere-personal: #76E6C7;
+  --chenu-sphere-business: #5BA9FF;
+  --chenu-sphere-scholar: #E0C46B;
+  --chenu-sphere-creative: #FF8BAA;
+  --chenu-sphere-social: #66D06F;
+  --chenu-sphere-institutions: #D08FFF;
+  --chenu-sphere-methodology: #59D0C6;
+  --chenu-sphere-xr: #8EC8FF;
+  --chenu-sphere-entertainment: #FFB04D;
+  --chenu-sphere-ai-lab: #FF5FFF;
+  --chenu-sphere-my-team: #5ED8FF;
+  
+  /* --------------------------------------------------------
+     AGENT COLORS
+     -------------------------------------------------------- */
+  --chenu-agent-nova: #FFFFFF;
+  --chenu-agent-architect: #5BA9FF;
+  --chenu-agent-thread-weaver: #FF5FFF;
+  --chenu-agent-memory-manager: #E0C46B;
+  --chenu-agent-ethics-guard: #FF4444;
+  --chenu-agent-drift-detector: #FFAA33;
+  
+  /* --------------------------------------------------------
+     TYPOGRAPHY
+     -------------------------------------------------------- */
+  --chenu-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --chenu-font-h1: 32px;
+  --chenu-font-h2: 24px;
+  --chenu-font-h3: 18px;
+  --chenu-font-body: 15px;
+  --chenu-font-small: 13px;
+  --chenu-font-xs: 11px;
+  
+  --chenu-font-light: 300;
+  --chenu-font-regular: 400;
+  --chenu-font-medium: 500;
+  --chenu-font-semibold: 600;
+  --chenu-font-bold: 700;
+  
+  --chenu-line-height: 1.5;
+  --chenu-line-height-tight: 1.25;
+  
+  /* --------------------------------------------------------
+     SPACING
+     -------------------------------------------------------- */
+  --chenu-space-xs: 4px;
+  --chenu-space-sm: 8px;
+  --chenu-space-md: 16px;
+  --chenu-space-lg: 24px;
+  --chenu-space-xl: 32px;
+  --chenu-space-xxl: 48px;
+  --chenu-space-xxxl: 64px;
+  
+  /* --------------------------------------------------------
+     BORDER RADIUS
+     -------------------------------------------------------- */
+  --chenu-radius-sm: 6px;
+  --chenu-radius-md: 10px;
+  --chenu-radius-lg: 16px;
+  --chenu-radius-xl: 24px;
+  --chenu-radius-full: 9999px;
+  
+  /* --------------------------------------------------------
+     SHADOWS
+     -------------------------------------------------------- */
+  --chenu-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.25);
+  --chenu-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --chenu-shadow-lg: 0 8px 22px rgba(0, 0, 0, 0.45);
+  --chenu-shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.55);
+  
+  --chenu-shadow-glow-blue: 0 0 20px rgba(91, 169, 255, 0.4);
+  --chenu-shadow-glow-white: 0 0 20px rgba(255, 255, 255, 0.3);
+  
+  /* --------------------------------------------------------
+     TRANSITIONS
+     -------------------------------------------------------- */
+  --chenu-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --chenu-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --chenu-duration-instant: 0ms;
+  --chenu-duration-fast: 120ms;
+  --chenu-duration-medium: 240ms;
+  --chenu-duration-slow: 450ms;
+  
+  /* --------------------------------------------------------
+     Z-INDEX LAYERS
+     -------------------------------------------------------- */
+  --chenu-z-background: 0;
+  --chenu-z-content: 10;
+  --chenu-z-navigation: 100;
+  --chenu-z-panel: 200;
+  --chenu-z-modal: 300;
+  --chenu-z-overlay: 400;
+  --chenu-z-tooltip: 500;
+  --chenu-z-nova: 600;
+  
+  /* --------------------------------------------------------
+     GRID
+     -------------------------------------------------------- */
+  --chenu-grid-columns: 12;
+  --chenu-grid-margin: 24px;
+  --chenu-grid-gutter: 16px;
+  --chenu-grid-max-width: 1440px;
+  
+  /* --------------------------------------------------------
+     COMPONENT SIZES
+     -------------------------------------------------------- */
+  --chenu-topbar-height: 64px;
+  --chenu-sidebar-width: 280px;
+  --chenu-sidebar-collapsed: 64px;
+  --chenu-panel-width: 380px;
+  --chenu-nova-panel-width: 420px;
+  
+  /* --------------------------------------------------------
+     FOCUS & ACCESSIBILITY
+     -------------------------------------------------------- */
+  --chenu-focus-ring: 0 0 0 2px rgba(91, 169, 255, 0.4);
+  --chenu-focus-color: var(--chenu-info);
+}
+
+/* ============================================================
+   DARK MODE (default)
+   ============================================================ */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* ============================================================
+   SPHERE THEME VARIANTS
+   ============================================================ */
+[data-sphere="personal"] {
+  --chenu-sphere-current: var(--chenu-sphere-personal);
+}
+
+[data-sphere="business"] {
+  --chenu-sphere-current: var(--chenu-sphere-business);
+}
+
+[data-sphere="scholar"] {
+  --chenu-sphere-current: var(--chenu-sphere-scholar);
+}
+
+[data-sphere="creative"] {
+  --chenu-sphere-current: var(--chenu-sphere-creative);
+}
+
+[data-sphere="social"] {
+  --chenu-sphere-current: var(--chenu-sphere-social);
+}
+
+[data-sphere="institutions"] {
+  --chenu-sphere-current: var(--chenu-sphere-institutions);
+}
+
+[data-sphere="methodology"] {
+  --chenu-sphere-current: var(--chenu-sphere-methodology);
+}
+
+[data-sphere="xr"] {
+  --chenu-sphere-current: var(--chenu-sphere-xr);
+}
+
+[data-sphere="entertainment"] {
+  --chenu-sphere-current: var(--chenu-sphere-entertainment);
+}
+
+[data-sphere="ai-lab"] {
+  --chenu-sphere-current: var(--chenu-sphere-ai-lab);
+}
+
+[data-sphere="my-team"] {
+  --chenu-sphere-current: var(--chenu-sphere-my-team);
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Text Colors */
+.text-primary { color: var(--chenu-text-primary); }
+.text-secondary { color: var(--chenu-text-secondary); }
+.text-muted { color: var(--chenu-text-muted); }
+.text-info { color: var(--chenu-info); }
+.text-success { color: var(--chenu-success); }
+.text-warning { color: var(--chenu-warning); }
+.text-error { color: var(--chenu-error); }
+
+/* Background Colors */
+.bg-base { background-color: var(--chenu-bg); }
+.bg-surface { background-color: var(--chenu-surface); }
+.bg-elevated { background-color: var(--chenu-elevated); }
+
+/* Sphere Backgrounds */
+.bg-sphere { background-color: var(--chenu-sphere-current); }
+.bg-sphere-10 { background-color: color-mix(in srgb, var(--chenu-sphere-current) 10%, transparent); }
+.bg-sphere-20 { background-color: color-mix(in srgb, var(--chenu-sphere-current) 20%, transparent); }
+
+/* Shadows */
+.shadow-sm { box-shadow: var(--chenu-shadow-sm); }
+.shadow-md { box-shadow: var(--chenu-shadow-md); }
+.shadow-lg { box-shadow: var(--chenu-shadow-lg); }
+.shadow-glow { box-shadow: var(--chenu-shadow-glow-blue); }
+
+/* Border Radius */
+.rounded-sm { border-radius: var(--chenu-radius-sm); }
+.rounded-md { border-radius: var(--chenu-radius-md); }
+.rounded-lg { border-radius: var(--chenu-radius-lg); }
+.rounded-full { border-radius: var(--chenu-radius-full); }
+
+/* Transitions */
+.transition-fast { transition: all var(--chenu-duration-fast) var(--chenu-ease-out); }
+.transition-medium { transition: all var(--chenu-duration-medium) var(--chenu-ease-out); }
+.transition-slow { transition: all var(--chenu-duration-slow) var(--chenu-ease-out); }
+
+/* ============================================================
+   COMPONENT BASE STYLES
+   ============================================================ */
+
+/* Card */
+.chenu-card {
+  background: var(--chenu-surface);
+  border: 1px solid var(--chenu-stroke-light);
+  border-radius: var(--chenu-radius-lg);
+  padding: var(--chenu-space-md);
+  box-shadow: var(--chenu-shadow-md);
+}
+
+/* Panel */
+.chenu-panel {
+  background: var(--chenu-surface);
+  border-radius: var(--chenu-radius-lg);
+  padding: var(--chenu-space-lg);
+  box-shadow: var(--chenu-shadow-lg);
+}
+
+/* Button Base */
+.chenu-btn {
+  font-family: var(--chenu-font-family);
+  font-size: var(--chenu-font-body);
+  font-weight: var(--chenu-font-medium);
+  border-radius: var(--chenu-radius-md);
+  padding: var(--chenu-space-sm) var(--chenu-space-md);
+  transition: all var(--chenu-duration-fast) var(--chenu-ease-out);
+  cursor: pointer;
+  border: none;
+}
+
+.chenu-btn-primary {
+  background: var(--chenu-info);
+  color: var(--chenu-text-primary);
+  box-shadow: 0 4px 12px rgba(91, 169, 255, 0.45);
+}
+
+.chenu-btn-primary:hover {
+  box-shadow: 0 0 12px rgba(91, 169, 255, 0.5);
+}
+
+.chenu-btn-ghost {
+  background: transparent;
+  color: var(--chenu-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.chenu-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Input Base */
+.chenu-input {
+  font-family: var(--chenu-font-family);
+  font-size: var(--chenu-font-body);
+  background: var(--chenu-bg);
+  border: 1px solid var(--chenu-stroke);
+  border-radius: var(--chenu-radius-md);
+  padding: var(--chenu-space-sm) var(--chenu-space-md);
+  color: var(--chenu-text-primary);
+  transition: all var(--chenu-duration-fast) var(--chenu-ease-out);
+}
+
+.chenu-input:focus {
+  outline: none;
+  border-color: var(--chenu-info);
+  box-shadow: var(--chenu-focus-ring);
+}
+
+/* Tag */
+.chenu-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--chenu-font-small);
+  padding: var(--chenu-space-xs) var(--chenu-space-sm);
+  border-radius: var(--chenu-radius-sm);
+  font-weight: var(--chenu-font-medium);
+}
+
+.chenu-tag-info {
+  background: color-mix(in srgb, var(--chenu-info) 20%, transparent);
+  color: var(--chenu-info);
+}
+
+.chenu-tag-success {
+  background: color-mix(in srgb, var(--chenu-success) 20%, transparent);
+  color: var(--chenu-success);
+}
+
+.chenu-tag-warning {
+  background: color-mix(in srgb, var(--chenu-warning) 20%, transparent);
+  color: var(--chenu-warning);
+}
+
+.chenu-tag-error {
+  background: color-mix(in srgb, var(--chenu-error) 20%, transparent);
+  color: var(--chenu-error);
+}
+
+/* ============================================================
+   GLOW EFFECTS (for agents, orbs)
+   ============================================================ */
+
+.glow-nova {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
+              0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.glow-architect {
+  box-shadow: 0 0 20px rgba(91, 169, 255, 0.4),
+              0 0 40px rgba(91, 169, 255, 0.2);
+}
+
+.glow-thread-weaver {
+  box-shadow: 0 0 20px rgba(255, 95, 255, 0.4),
+              0 0 40px rgba(255, 95, 255, 0.2);
+}
+
+.glow-sphere {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--chenu-sphere-current) 40%, transparent),
+              0 0 40px color-mix(in srgb, var(--chenu-sphere-current) 20%, transparent);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes chenu-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes chenu-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px currentColor; }
+  50% { box-shadow: 0 0 30px currentColor, 0 0 50px currentColor; }
+}
+
+@keyframes chenu-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes chenu-slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chenu-scale-in {
+  from { 
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pulse { animation: chenu-pulse 2s ease-in-out infinite; }
+.animate-glow { animation: chenu-glow-pulse 3s ease-in-out infinite; }
+.animate-fade-in { animation: chenu-fade-in var(--chenu-duration-medium) var(--chenu-ease-out); }
+.animate-slide-up { animation: chenu-slide-up var(--chenu-duration-slow) var(--chenu-ease-out); }
+.animate-scale-in { animation: chenu-scale-in var(--chenu-duration-slow) var(--chenu-ease-out); }

@@ -1,0 +1,29 @@
+# CHE·NU — Simplified Requirements
+# Python 3.12
+
+# Web Framework
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+aiosqlite
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+
+# HTTP
+httpx
+
+# Environment & Config
+python-dotenv
+pydantic
+pydantic-settings
+
+# Utilities
+python-multipart
+email-validator
+
+# Logging
+loguru

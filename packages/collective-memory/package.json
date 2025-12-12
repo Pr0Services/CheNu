@@ -1,0 +1,9 @@
+{
+  "name": "@chenu/collective-memory-navigation",
+  "version": "1.5.0",
+  "description": "CHE·NU Collective Memory + Personal Navigation - One reality, many perspectives",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": { "react": ">=17.0.0" },
+  "license": "MIT"
+}

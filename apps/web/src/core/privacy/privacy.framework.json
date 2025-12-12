@@ -1,0 +1,77 @@
+{
+  "privacy_and_personal_data": {
+    "status": "FOUNDATIONAL",
+    "scope": "ALL_PERSONAL_AND_IDENTIFIABLE_DATA",
+    "core_principle": "Any data linked to a human individual is protected by default, regardless of intent, usage, or perceived value.",
+
+    "data_classification": {
+      "personal_data_includes": [
+        "identity_data",
+        "profiles",
+        "preferences",
+        "personal_notes",
+        "private_messages",
+        "behavioral_traces",
+        "project_data_tied_to_a_person",
+        "xr_and_biometric_signals",
+        "contextual_inferences_about_individuals"
+      ],
+      "sensitive_data": "receives_maximum_protection"
+    },
+
+    "default_privacy_rules": {
+      "private_by_default": true,
+      "no_implicit_sharing": true,
+      "no_opt_out_tricks": true,
+      "no_access_without_explicit_human_action": true
+    },
+
+    "agent_access_rules": {
+      "explicit_request_required": true,
+      "single_task_scope": true,
+      "non_persistent_access": true,
+      "mandatory_access_declaration": true,
+      "forbidden": [
+        "implicit_data_access",
+        "silent_aggregation",
+        "cross_context_inference",
+        "profiling"
+      ]
+    },
+
+    "disclosure_and_sharing": {
+      "explicit": true,
+      "reversible": true,
+      "time_bound": true,
+      "never_implied_by_usage": true
+    },
+
+    "data_minimization": {
+      "collect_minimum_necessary": true,
+      "avoid_redundancy": true,
+      "human_deletion_without_justification": true,
+      "deletion_is_immediate_and_irreversible": true
+    },
+
+    "export_and_portability": {
+      "full_export_right": true,
+      "human_readable_formats": ["txt", "md", "json", "pdf"],
+      "exported_data_loses_system_authority": true,
+      "no_reingestion_without_new_consent": true
+    },
+
+    "surveillance_prohibition": {
+      "no_continuous_monitoring": true,
+      "no_emotional_tracking": true,
+      "no_productivity_scoring": true,
+      "no_hidden_individual_analytics": true
+    },
+
+    "regulatory_alignment": {
+      "gdpr": "compatible",
+      "ccpa_cpra": "compatible",
+      "pipeda": "compatible",
+      "conflict_resolution": "highest_protection_applies"
+    }
+  }
+}

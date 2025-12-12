@@ -1,0 +1,21 @@
+{
+  "system_version": "CHE·NU ULTRA 1.0",
+  "kernel": "CORE+ / OS-5.5 / OS-6.0",
+  "system_prompt_file": "./system_prompts/chenu_ultra_system_prompt.txt",
+  "models": {
+    "main": "gpt-4-turbo",
+    "fast": "gpt-4o-mini"
+  },
+  "agents": [
+    "nova_prime",
+    "architect_omega",
+    "thread_weaver",
+    "echo_mind",
+    "reality_synthesizer",
+    "csf_simulator",
+    "pxr_engine"
+  ],
+  "lawbook_enforced": true,
+  "multiplex_enabled": true,
+  "self_healing_enabled": true
+}

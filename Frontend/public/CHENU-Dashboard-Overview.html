@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHE·NU — Dashboard Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-surface: #12121a;
+            --bg-card: #1a1a24;
+            --accent-blue: #4a9eff;
+            --accent-purple: #8b5cf6;
+            --accent-teal: #14b8a6;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --accent-green: #22c55e;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2a2a3a;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(18, 18, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text span {
+            color: var(--accent-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ethic-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-green);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Main Layout */
+        .main {
+            display: flex;
+            padding-top: 73px;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .nav-item:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: rgba(74, 158, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .welcome-section {
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-section p {
+            color: var(--text-secondary);
+        }
+
+        /* Universe View */
+        .universe-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .universe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .universe-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .universe-canvas {
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Orbital System */
+        .orbital-system {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .trunk {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.4);
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .trunk:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .trunk-icon {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .trunk-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Orbits */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit-1 { width: 220px; height: 220px; }
+        .orbit-2 { width: 320px; height: 320px; }
+        .orbit-3 { width: 420px; height: 420px; }
+
+        /* Spheres */
+        .sphere {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .sphere:hover {
+            transform: scale(1.15);
+            z-index: 20;
+        }
+
+        .sphere-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .sphere-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .sphere-personal {
+            background: linear-gradient(135deg, #f43f5e, #ec4899);
+            top: 50%;
+            left: calc(50% - 160px);
+            transform: translateY(-50%);
+        }
+
+        .sphere-business {
+            background: linear-gradient(135deg, #4a9eff, #3b82f6);
+            top: calc(50% - 130px);
+            left: calc(50% + 80px);
+        }
+
+        .sphere-social {
+            background: linear-gradient(135deg, #f59e0b, #eab308);
+            top: calc(50% + 130px);
+            left: calc(50% + 80px);
+        }
+
+        .sphere-scholar {
+            background: linear-gradient(135deg, #14b8a6, #06b6d4);
+            top: calc(50% - 180px);
+            left: calc(50% - 60px);
+        }
+
+        .sphere-creative {
+            background: linear-gradient(135deg, #a855f7, #8b5cf6);
+            top: calc(50% + 180px);
+            left: calc(50% - 60px);
+        }
+
+        .sphere-xr {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            top: 50%;
+            left: calc(50% + 200px);
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            margin-top: 0.25rem;
+        }
+
+        /* Panels Grid */
+        .panels-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .panel-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .panel-action {
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        /* Active Agents */
+        .agent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .agent-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-surface);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .agent-item:hover {
+            background: rgba(74, 158, 255, 0.1);
+        }
+
+        .agent-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .agent-icon.analysis { background: rgba(74, 158, 255, 0.2); }
+        .agent-icon.methodology { background: rgba(139, 92, 246, 0.2); }
+        .agent-icon.calculation { background: rgba(20, 184, 166, 0.2); }
+        .agent-icon.document { background: rgba(245, 158, 11, 0.2); }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .agent-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.15rem;
+        }
+
+        .agent-sphere {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .agent-status {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Recent Tasks */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-surface);
+            border-radius: 8px;
+        }
+
+        .task-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .task-status.complete { background: var(--accent-green); }
+        .task-status.pending { background: var(--accent-amber); }
+        .task-status.active { background: var(--accent-blue); }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task-title {
+            font-size: 0.85rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .task-meta {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .quick-action {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-action:hover {
+            border-color: var(--accent-blue);
+            background: rgba(74, 158, 255, 0.05);
+        }
+
+        .quick-action-icon {
+            font-size: 1.25rem;
+        }
+
+        .quick-action-label {
+            font-size: 0.85rem;
+        }
+
+        /* Floating Elements */
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(74, 158, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-400px) translateX(100px); opacity: 0; }
+        }
+
+        /* Command Palette Hint */
+        .command-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .kbd {
+            padding: 0.2rem 0.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.75rem;
+        }
+
+        /* Animations */
+        .sphere {
+            animation: orbit-float 6s ease-in-out infinite;
+        }
+
+        .sphere-personal { animation-delay: 0s; }
+        .sphere-business { animation-delay: 1s; }
+        .sphere-social { animation-delay: 2s; }
+        .sphere-scholar { animation-delay: 3s; }
+        .sphere-creative { animation-delay: 4s; }
+        .sphere-xr { animation-delay: 5s; }
+
+        @keyframes orbit-float {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(calc(-50% - 5px)) scale(1.02); }
+        }
+
+        .sphere-personal, .sphere-xr {
+            animation: orbit-float-alt 6s ease-in-out infinite;
+        }
+
+        @keyframes orbit-float-alt {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(calc(-50% + 5px)) scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">🏠</div>
+            <div class="logo-text">CHE<span>·</span>NU</div>
+        </div>
+        <div class="header-actions">
+            <div class="ethic-badge">
+                <span>🧭</span>
+                <span>Responsabilité humaine active</span>
+            </div>
+            <div class="user-avatar">JO</div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="main">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Navigation</h3>
+                <div class="nav-item active">
+                    <span class="nav-icon">🌐</span>
+                    <span>Universe View</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span>Tâches</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🤖</span>
+                    <span>Agents</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>Analytics</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Sphères</h3>
+                <div class="nav-item">
+                    <span class="nav-icon">💜</span>
+                    <span>Personnel</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    <span>Business</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🌐</span>
+                    <span>Social & Média</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📚</span>
+                    <span>Scholar</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🎨</span>
+                    <span>Creative</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🥽</span>
+                    <span>XR / Spatial</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Système</h3>
+                <div class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Paramètres</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🔒</span>
+                    <span>Mode Silence</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="welcome-section">
+                <h1>Bienvenue, Jo 👋</h1>
+                <p>Votre espace souverain est prêt. 6 sphères actives · 12 agents disponibles.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Tâches actives</div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-change">↑ 3 aujourd'hui</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Agents mobilisés</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-change">Sur 168 disponibles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Sphère active</div>
+                    <div class="stat-value" style="font-size: 1.25rem;">Business</div>
+                    <div class="stat-change">💼 Pro-Service</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Checkpoints</div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-change">Aucun requis</div>
+                </div>
+            </div>
+
+            <!-- Universe View -->
+            <div class="universe-container">
+                <div class="floating-particles">
+                    <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+                    <div class="particle" style="left: 30%; top: 60%; animation-delay: 2s;"></div>
+                    <div class="particle" style="left: 70%; top: 30%; animation-delay: 4s;"></div>
+                    <div class="particle" style="left: 85%; top: 70%; animation-delay: 6s;"></div>
+                    <div class="particle" style="left: 50%; top: 80%; animation-delay: 8s;"></div>
+                </div>
+                
+                <div class="universe-header">
+                    <h2>🌌 Universe View</h2>
+                    <div class="view-toggle">
+                        <button class="toggle-btn active">2D</button>
+                        <button class="toggle-btn">3D</button>
+                        <button class="toggle-btn">XR</button>
+                    </div>
+                </div>
+                
+                <div class="universe-canvas">
+                    <div class="orbital-system">
+                        <!-- Orbits -->
+                        <div class="orbit orbit-1"></div>
+                        <div class="orbit orbit-2"></div>
+                        <div class="orbit orbit-3"></div>
+                        
+                        <!-- Trunk -->
+                        <div class="trunk">
+                            <span class="trunk-icon">🌳</span>
+                            <span class="trunk-label">Trunk</span>
+                        </div>
+                        
+                        <!-- Spheres -->
+                        <div class="sphere sphere-personal">
+                            <span class="sphere-icon">💜</span>
+                            <span class="sphere-label">Personal</span>
+                        </div>
+                        
+                        <div class="sphere sphere-business">
+                            <span class="sphere-icon">💼</span>
+                            <span class="sphere-label">Business</span>
+                        </div>
+                        
+                        <div class="sphere sphere-social">
+                            <span class="sphere-icon">📱</span>
+                            <span class="sphere-label">Social</span>
+                        </div>
+                        
+                        <div class="sphere sphere-scholar">
+                            <span class="sphere-icon">📚</span>
+                            <span class="sphere-label">Scholar</span>
+                        </div>
+                        
+                        <div class="sphere sphere-creative">
+                            <span class="sphere-icon">🎨</span>
+                            <span class="sphere-label">Creative</span>
+                        </div>
+                        
+                        <div class="sphere sphere-xr">
+                            <span class="sphere-icon">🥽</span>
+                            <span class="sphere-label">XR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panels -->
+            <div class="panels-grid">
+                <!-- Active Agents -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>🤖 Agents actifs</h3>
+                        <span class="panel-action">Voir tous →</span>
+                    </div>
+                    <div class="agent-list">
+                        <div class="agent-item">
+                            <div class="agent-icon analysis">📊</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Analyste Construction</div>
+                                <div class="agent-sphere">Business · L1</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-icon methodology">📐</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Méthodologue RBQ</div>
+                                <div class="agent-sphere">Business · L2</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-icon calculation">🧮</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Calculateur Estimations</div>
+                                <div class="agent-sphere">Business · L2</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </div>
+                        <div class="agent-item">
+                            <div class="agent-icon document">📄</div>
+                            <div class="agent-info">
+                                <div class="agent-name">Documentaliste</div>
+                                <div class="agent-sphere">Scholar · L1</div>
+                            </div>
+                            <div class="agent-status"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions + Tasks -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>⚡ Actions rapides</h3>
+                        </div>
+                        <div class="quick-actions">
+                            <div class="quick-action">
+                                <span class="quick-action-icon">➕</span>
+                                <span class="quick-action-label">Nouvelle tâche</span>
+                            </div>
+                            <div class="quick-action">
+                                <span class="quick-action-icon">🤖</span>
+                                <span class="quick-action-label">Appeler agent</span>
+                            </div>
+                            <div class="quick-action">
+                                <span class="quick-action-icon">🔄</span>
+                                <span class="quick-action-label">Changer sphère</span>
+                            </div>
+                            <div class="quick-action">
+                                <span class="quick-action-icon">🥽</span>
+                                <span class="quick-action-label">Mode XR</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>📋 Tâches récentes</h3>
+                            <span class="panel-action">Toutes →</span>
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <div class="task-status active"></div>
+                                <div class="task-info">
+                                    <div class="task-title">Estimation projet Laval</div>
+                                    <div class="task-meta">Business · En cours</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-status pending"></div>
+                                <div class="task-info">
+                                    <div class="task-title">Conformité CNESST</div>
+                                    <div class="task-meta">Business · En attente</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-status complete"></div>
+                                <div class="task-info">
+                                    <div class="task-title">Documentation API</div>
+                                    <div class="task-meta">Scholar · Complété</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Command Palette Hint -->
+    <div class="command-hint">
+        <span class="kbd">⌘</span>
+        <span class="kbd">K</span>
+        <span>Commande rapide</span>
+    </div>
+
+    <script>
+        // Simple hover effects and interactions
+        document.querySelectorAll('.sphere').forEach(sphere => {
+            sphere.addEventListener('click', () => {
+                const label = sphere.querySelector('.sphere-label').textContent;
+                alert(`Ouverture de la sphère: ${label}`);
+            });
+        });
+
+        document.querySelector('.trunk').addEventListener('click', () => {
+            alert('Trunk — Core Laws · Ethics · Orchestration');
+        });
+
+        // Toggle buttons
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

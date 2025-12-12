@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chenu
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+      POSTGRES_DB: chenu_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - chenu_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chenu -d chenu_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api_service:
+    build: ../backend
+    restart: unless-stopped
+    env_file: ../.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  orchestrator:
+    build: ../orchestrator
+    restart: unless-stopped
+    env_file: ../.env
+    depends_on:
+      - api_service
+
+  xr_gateway:
+    build: ../xr-gateway
+    restart: unless-stopped
+    env_file: ../.env
+    ports:
+      - "8081:8081"
+
+  front_ui:
+    build: ../frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file: ../.env
+    depends_on:
+      - api_service
+
+volumes:
+  chenu_db_data:

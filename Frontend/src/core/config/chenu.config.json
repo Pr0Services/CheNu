@@ -1,0 +1,180 @@
+{
+  "version": "1.0.0",
+  "name": "CHE·NU",
+  "description": "Governed Intelligence Operating System",
+  
+  "spheres": [
+    {
+      "id": "personal",
+      "name": "Personal",
+      "type": "personal",
+      "icon": "🧑",
+      "description": "Personal life management, health, learning, and goals",
+      "color": "#4CAF50",
+      "order": 1,
+      "isActive": true,
+      "defaultDimension": "M",
+      "agents": ["life-manager", "health-tracker", "finance-advisor", "learning-coach"],
+      "tools": ["calendar", "notes", "tasks", "habits", "journal"]
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "type": "business",
+      "icon": "🏢",
+      "description": "Strategic planning, financial management, market intelligence",
+      "color": "#1E3A5F",
+      "order": 2,
+      "isActive": true,
+      "defaultDimension": "L",
+      "agents": ["strategy-ai", "finance-analyst", "market-intel", "partnership-mgr", "operations-ai"],
+      "tools": ["crm", "erp", "analytics", "forecasting", "contracts"]
+    },
+    {
+      "id": "creative",
+      "name": "Creative Studio",
+      "type": "creative",
+      "icon": "🎨",
+      "description": "Content creation, brand management, creative production",
+      "color": "#8B2942",
+      "order": 3,
+      "isActive": true,
+      "defaultDimension": "L",
+      "agents": ["art-director", "writer-ai", "video-producer", "designer", "brand-manager"],
+      "tools": ["image-gen", "video-edit", "copywriting", "brand-kit", "templates"]
+    },
+    {
+      "id": "scholar",
+      "name": "Scholar",
+      "type": "scholar",
+      "icon": "🎓",
+      "description": "Research, knowledge management, academic work",
+      "color": "#5D3A6E",
+      "order": 4,
+      "isActive": true,
+      "defaultDimension": "M",
+      "agents": ["research-ai", "patent-analyst", "lit-review", "data-scientist", "tech-writer"],
+      "tools": ["academic-db", "patent-search", "citation-mgr", "lab-notebook"]
+    },
+    {
+      "id": "social",
+      "name": "Social & Media",
+      "type": "social",
+      "icon": "📱",
+      "description": "Social media management, community engagement, PR",
+      "color": "#D4752A",
+      "order": 5,
+      "isActive": true,
+      "defaultDimension": "M",
+      "agents": ["community-mgr", "content-scheduler", "analytics-ai", "influencer-ai", "pr-manager"],
+      "tools": ["post-scheduler", "analytics", "engagement", "listening"]
+    },
+    {
+      "id": "institutions",
+      "name": "Institutions",
+      "type": "institutions",
+      "icon": "🏛️",
+      "description": "Compliance, legal documentation, governance",
+      "color": "#2A7B7B",
+      "order": 6,
+      "isActive": true,
+      "defaultDimension": "M",
+      "agents": ["compliance-ai", "legal-analyst", "audit-manager", "policy-writer", "risk-assessor"],
+      "tools": ["compliance-db", "legal-docs", "audit-trail", "policy-mgmt"]
+    },
+    {
+      "id": "methodology",
+      "name": "Methodology",
+      "type": "methodology",
+      "icon": "⚙️",
+      "description": "Process optimization, quality assurance, best practices",
+      "color": "#2D5A3D",
+      "order": 7,
+      "isActive": true,
+      "defaultDimension": "S",
+      "agents": ["process-ai", "qa-manager", "workflow-designer", "template-mgr", "trainer-ai"],
+      "tools": ["workflows", "templates", "checklists", "sops", "training"]
+    },
+    {
+      "id": "xr",
+      "name": "XR / Immersive",
+      "type": "xr",
+      "icon": "🥽",
+      "description": "Immersive experiences, 3D visualization, spatial computing",
+      "color": "#3A5A8C",
+      "order": 8,
+      "isActive": false,
+      "defaultDimension": "S",
+      "agents": ["spatial-designer", "avatar-creator", "environment-ai", "interaction-ai"],
+      "tools": ["3d-modeling", "avatars", "environments", "gestures"]
+    }
+  ],
+  
+  "trunk": {
+    "id": "trunk",
+    "name": "Trunk",
+    "description": "Constitutional core - Laws, Memory, Orchestration",
+    "components": [
+      {
+        "id": "laws",
+        "name": "Laws Engine",
+        "icon": "⚖️",
+        "description": "Constitutional governance rules"
+      },
+      {
+        "id": "memory",
+        "name": "Memory System",
+        "icon": "🧬",
+        "description": "Persistent context and learning"
+      },
+      {
+        "id": "orchestrator",
+        "name": "Orchestrator",
+        "icon": "🧭",
+        "description": "Request routing and coordination"
+      },
+      {
+        "id": "auth",
+        "name": "Auth & Access",
+        "icon": "🔐",
+        "description": "Identity and permissions"
+      },
+      {
+        "id": "audit",
+        "name": "Audit Trail",
+        "icon": "📊",
+        "description": "Complete decision traceability"
+      },
+      {
+        "id": "sync",
+        "name": "Sync Engine",
+        "icon": "🔄",
+        "description": "State management and sync"
+      }
+    ]
+  },
+  
+  "agents": {
+    "levels": [
+      { "id": "L0", "name": "NOVA AI", "count": 1, "description": "Supreme orchestrator" },
+      { "id": "L1", "name": "Directors", "count": 4, "description": "Strategic control" },
+      { "id": "L2", "name": "Managers", "count": 11, "description": "Sphere coordination" },
+      { "id": "L3", "name": "Analysts", "count": 35, "description": "Data and insights" },
+      { "id": "L4", "name": "Executors", "count": 85, "description": "Task execution" },
+      { "id": "L5", "name": "Observers", "count": 32, "description": "Memory and audit" }
+    ],
+    "total": 168
+  },
+  
+  "theme": {
+    "default": "tree_nature",
+    "available": ["tree_nature", "sacred_gold", "deep_ocean", "midnight", "high_contrast"]
+  },
+  
+  "features": {
+    "xr": false,
+    "multiLLM": true,
+    "meetings": true,
+    "collaboration": false
+  }
+}

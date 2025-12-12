@@ -1,0 +1,36 @@
+{
+  "name": "@chenu/avatar-evolution-universe",
+  "version": "1.2.0",
+  "description": "CHE·NU Avatar Evolution System + Multi-Meeting Universe View - Non-manipulative immersive coordination",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "chenu",
+    "xr",
+    "vr",
+    "avatar",
+    "evolution",
+    "universe",
+    "meetings",
+    "coordination",
+    "non-manipulative",
+    "ethical",
+    "react"
+  ],
+  "author": "CHE·NU",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "CHE_NU_THEME_CONFIG_VERSION": "1.0",
+  "GLOBAL_RULES": {
+    "themesModifyLogic": false,
+    "themesModifyAuthority": false,
+    "themesModifyAgents": false,
+    "themesModifyTimeline": false,
+    "themeSwitching": {
+      "manualOnly": true,
+      "preserveSession": true,
+      "smoothTransition": true
+    }
+  },
+  "THEMES": {
+    "REALISTIC_PROFESSIONAL": {
+      "id": "realistic_professional",
+      "label": "Realistic / Professional",
+      "intent": "clarity_trust_neutrality",
+      "ui": {
+        "geometry": "rectangular_soft",
+        "grid": "strict",
+        "primaryColors": ["#F8F9FA", "#E5E7EB", "#374151"],
+        "accentColor": "#2563EB",
+        "typography": "sans_serif_clean",
+        "animations": {
+          "enabled": true,
+          "style": "minimal",
+          "speed": "slow"
+        }
+      },
+      "agents": {
+        "representation": "abstract_icons",
+        "shape": ["circle", "square"],
+        "dominance": "low"
+      },
+      "guards": {
+        "visualStyle": "subtle_lock",
+        "alertTone": "neutral"
+      },
+      "xr": {
+        "environment": "control_room",
+        "lighting": "diffuse",
+        "panels": "flat",
+        "particles": false
+      }
+    },
+    "AVATAR_HUMAN_CENTERED": {
+      "id": "avatar_human_centered",
+      "label": "Avatar / Human Centered",
+      "intent": "presence_relation_collaboration",
+      "ui": {
+        "geometry": "rounded",
+        "grid": "soft",
+        "primaryColors": ["#F5F1EB", "#E7DED3", "#6B7280"],
+        "accentColor": "#8B9467",
+        "typography": "sans_serif_clean",
+        "animations": {
+          "enabled": true,
+          "style": "gentle",
+          "speed": "slow"
+        }
+      },
+      "avatars": {
+        "style": "stylized_non_realistic",
+        "expressions": "limited_calm",
+        "scale": "human_proportion",
+        "personalSpace": "respected"
+      },
+      "agents": {
+        "representation": "presence_based",
+        "dominance": "very_low"
+      },
+      "xr": {
+        "environment": "circular_room",
+        "lighting": "warm_diffuse",
+        "gestures": "slow",
+        "gaze": "neutral"
+      }
+    },
+    "ANCIENT_BUILDER": {
+      "id": "ancient_builder",
+      "label": "Ancient / Builder Civilization",
+      "intent": "continuity_responsibility_time",
+      "ui": {
+        "geometry": "massive_symmetric",
+        "grid": "invisible",
+        "primaryColors": ["#C4B5A5", "#8B7E6A", "#3F3A32"],
+        "accentColor": "#9A7F42",
+        "typography": "sans_serif_clean",
+        "animations": {
+          "enabled": true,
+          "style": "very_slow",
+          "speed": "very_slow"
+        }
+      },
+      "timeline": {
+        "visualization": "engraved",
+        "rollback": "reading_position_shift"
+      },
+      "agents": {
+        "representation": ["tablet", "marker", "stele"],
+        "anthropomorphic": false
+      },
+      "xr": {
+        "environment": "temple_monolith_tree",
+        "lighting": "natural",
+        "ambience": "grounded"
+      }
+    },
+    "COSMIC_ABSTRACT": {
+      "id": "cosmic_abstract",
+      "label": "Cosmic / Abstract",
+      "intent": "perspective_exploration_distance",
+      "ui": {
+        "geometry": "floating",
+        "grid": "none",
+        "primaryColors": ["#0B1020", "#1E1B4B", "#E0E7FF"],
+        "accentColor": "#38BDF8",
+        "typography": "sans_serif_clean",
+        "animations": {
+          "enabled": true,
+          "style": "fluid",
+          "speed": "slow"
+        }
+      },
+      "timeline": {
+        "visualization": "arcs_or_constellations"
+      },
+      "agents": {
+        "representation": "orbiting_nodes",
+        "faces": false
+      },
+      "xr": {
+        "environment": "open_space",
+        "gravity": "none",
+        "referencePoint": "stable_center",
+        "motion": "drift"
+      }
+    },
+    "FUTURIST_SYSTEMIC": {
+      "id": "futurist_systemic",
+      "label": "Futurist / Systemic",
+      "intent": "precision_orchestration_clarity",
+      "ui": {
+        "geometry": "modular",
+        "grid": "visible",
+        "primaryColors": ["#020617", "#0F172A", "#CBD5E1"],
+        "accentColor": "#22D3EE",
+        "typography": "sans_serif_clean",
+        "animations": {
+          "enabled": true,
+          "style": "precise",
+          "speed": "controlled"
+        }
+      },
+      "agents": {
+        "representation": "functional_nodes",
+        "activityIndicator": "soft_pulse"
+      },
+      "guards": {
+        "visualStyle": "shield_frame",
+        "feedback": "soft_pulse_with_text"
+      },
+      "xr": {
+        "environment": "system_control_room",
+        "panels": "layered_floating",
+        "horizon": "stable"
+      }
+    }
+  }
+}

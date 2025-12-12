@@ -1,0 +1,153 @@
+{
+  "cheNuVersion": "foundation-1.0",
+  "principles": {
+    "humanInTheLoop": true,
+    "timelineIsTruth": true,
+    "noAutoDecision": true,
+    "agentsAdviseOnly": true,
+    "rollbackIsInterpretation": true
+  },
+
+  "timeline": {
+    "mode": "append-only",
+    "modifiable": false,
+    "sourceOfTruth": true,
+    "writeCondition": "explicit_human_validation"
+  },
+
+  "paths": {
+    "resume": {
+      "intent": "resume_previous_context",
+      "entry": "app_open",
+      "options": [
+        "continue_as_is",
+        "change_preset",
+        "change_sphere"
+      ],
+      "rollback": "return_to_neutral",
+      "save": {
+        "mode": "automatic",
+        "conditions": ["valid_state_only"]
+      },
+      "restrictions": [
+        "no_new_decision_written",
+        "no_intrusive_suggestions"
+      ]
+    },
+
+    "newObjective": {
+      "intent": "start_new_objective",
+      "entry": "user_input",
+      "options": [
+        "select_sphere",
+        "select_preset",
+        "estimate_duration"
+      ],
+      "rollback": "cancel_before_validation",
+      "save": {
+        "mode": "explicit",
+        "conditions": ["human_validation_required"]
+      },
+      "restrictions": [
+        "no_implicit_creation",
+        "no_auto_write"
+      ]
+    },
+
+    "exploration": {
+      "intent": "explore_without_commitment",
+      "entry": "preset_exploration",
+      "options": [
+        "take_notes",
+        "switch_to_focus",
+        "mark_idea_as_important"
+      ],
+      "rollback": "return_to_last_stable_state",
+      "save": {
+        "mode": "selective",
+        "conditions": ["explicitly_marked_only"]
+      },
+      "restrictions": [
+        "no_forced_persistence"
+      ]
+    },
+
+    "decision": {
+      "intent": "make_explicit_decision",
+      "entry": "decision_action",
+      "options": [
+        "view_context",
+        "request_analysis",
+        "compare_options"
+      ],
+      "rollback": "return_to_previous_context",
+      "save": {
+        "mode": "mandatory",
+        "conditions": ["always_written"]
+      },
+      "restrictions": [
+        "no_deletion_of_decision"
+      ]
+    }
+  },
+
+  "optionsRules": {
+    "allowed": [
+      "change_preset",
+      "save_idea",
+      "continue_or_return"
+    ],
+    "forbidden": [
+      "silent_automation",
+      "implicit_decision",
+      "unexplained_optimization"
+    ]
+  },
+
+  "rollback": {
+    "strategy": "reinterpret_state",
+    "writesTimeline": false,
+    "allowedActions": [
+      "change_active_pointer",
+      "reopen_previous_context"
+    ],
+    "forbiddenActions": [
+      "delete_event",
+      "rewrite_timeline",
+      "mask_history"
+    ]
+  },
+
+  "sessionPersistence": {
+    "saveOn": [
+      "explicit_validation",
+      "session_end"
+    ],
+    "store": [
+      "active_preset",
+      "active_sphere",
+      "last_valid_objective",
+      "timeline_pointer"
+    ],
+    "ignore": [
+      "visual_state",
+      "unvalidated_hesitation",
+      "temporary_exploration"
+    ]
+  },
+
+  "limitations": {
+    "maxPrimaryPaths": 4,
+    "allowUndoDestructive": false,
+    "allowAgentDecision": false,
+    "maxSimultaneousPresets": 1,
+    "maxIntrusivePrompts": 0
+  },
+
+  "successCriteria": {
+    "userUnderstandsPosition": true,
+    "safeExploration": true,
+    "stressFreeExit": true,
+    "easyResumption": true
+  }
+}

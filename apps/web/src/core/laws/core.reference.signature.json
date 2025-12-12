@@ -1,0 +1,64 @@
+{
+  "CHE_NU_CORE_REFERENCE_SIGNATURE": {
+    "referenceVersion": "1.0",
+    "status": "FOUNDATION_FREEZE",
+
+    "hashing": {
+      "algorithm": "SHA-256",
+      "canonicalization": "json_sorted_keys_utf8",
+      "hashOf": "CHE_NU_CORE_REFERENCE_V1"
+    },
+
+    "hash": {
+      "value": "PENDING_HUMAN_GENERATION",
+      "generatedAt": "PENDING",
+      "generatedBy": "human_authority",
+      "note": "Hash must be generated and signed by human authority before deployment"
+    },
+
+    "signature": {
+      "type": "declarative_system_signature",
+      "signedBy": "CHE-NU_FOUNDER",
+      "role": "human_authority",
+      "intent": [
+        "freeze_foundation",
+        "prevent_drift",
+        "ensure_explainability",
+        "preserve_human_authority"
+      ],
+      "statement": "This hash represents the immutable foundation of CHE·NU. Any deviation invalidates compatibility."
+    },
+
+    "verificationRules": {
+      "onMismatch": [
+        "reject_changes",
+        "require_human_review",
+        "invalidate_ai_output"
+      ],
+      "onMatch": [
+        "allow_development",
+        "allow_ai_execution"
+      ]
+    },
+
+    "protectedElements": [
+      "ABSOLUTE_LAWS",
+      "HUMAN_AUTHORITY",
+      "PARALLEL_CHAIN_RULE",
+      "NO_INVISIBLE_ACTION",
+      "READ_ONLY_LEARNING",
+      "THEMES_PERCEPTION_ONLY",
+      "DECISION_CHAIN",
+      "GUARD_ENFORCEMENT",
+      "TIMELINE_IMMUTABILITY",
+      "EXPLAINABILITY"
+    ],
+
+    "auditTrail": {
+      "created": "2024-12-08T00:00:00Z",
+      "lastVerified": null,
+      "verificationCount": 0,
+      "violations": []
+    }
+  }
+}

@@ -1,0 +1,198 @@
+# ============================================================
+# CHE·NU ULTRA PACK — Docker Compose Production
+# Version: ULTRA-6.0-prod
+# ============================================================
+
+version: '3.9'
+
+services:
+  # ============================================================
+  # API SERVICE - Main Fastify Backend
+  # ============================================================
+  api_service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: chenu/api:latest
+    container_name: chenu-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://chenu:${DB_PASSWORD}@postgres:5432/chenu_db
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    depends_on:
+      - postgres
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - chenu-network
+
+  # ============================================================
+  # ORCHESTRATOR LLM - Agent Orchestration Service
+  # ============================================================
+  orchestrator_llm:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    image: chenu/orchestrator:latest
+    container_name: chenu-orchestrator
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - SYSTEM_PROMPT=ULTRA_PACK
+      - HEALING_ENABLED=true
+      - MULTIPLEX_ENABLED=true
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    depends_on:
+      - api_service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+    networks:
+      - chenu-network
+
+  # ============================================================
+  # FRONTEND UI - React/Next.js Application
+  # ============================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: chenu/frontend:latest
+    container_name: chenu-frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api_service:3000
+      - NEXT_PUBLIC_XR_GATEWAY_URL=ws://xr_gateway:8080
+    depends_on:
+      - api_service
+    networks:
+      - chenu-network
+
+  # ============================================================
+  # XR GATEWAY - WebSocket XR Service
+  # ============================================================
+  xr_gateway:
+    build:
+      context: ./xr-gateway
+      dockerfile: Dockerfile
+    image: chenu/xr-gateway:latest
+    container_name: chenu-xr
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - LATENCY_TARGET_MS=20
+      - FRAME_RATE=90
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - chenu-network
+
+  # ============================================================
+  # POSTGRESQL - Primary Database
+  # ============================================================
+  postgres:
+    image: pgvector/pgvector:pg15
+    container_name: chenu-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=chenu
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=chenu_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/CHENU_DATABASE_COMPLETE_v2.0.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chenu -d chenu_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - chenu-network
+
+  # ============================================================
+  # REDIS - Caching & Session Store
+  # ============================================================
+  redis:
+    image: redis:7-alpine
+    container_name: chenu-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - chenu-network
+
+  # ============================================================
+  # VECTOR DB (Optional) - For Semantic Search
+  # ============================================================
+  # Uncomment if needed
+  # qdrant:
+  #   image: qdrant/qdrant:latest
+  #   container_name: chenu-qdrant
+  #   ports:
+  #     - "6333:6333"
+  #   volumes:
+  #     - qdrant_data:/qdrant/storage
+  #   networks:
+  #     - chenu-network
+
+# ============================================================
+# VOLUMES
+# ============================================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  # qdrant_data:
+  #   driver: local
+
+# ============================================================
+# NETWORKS
+# ============================================================
+networks:
+  chenu-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

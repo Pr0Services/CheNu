@@ -1,0 +1,145 @@
+{
+  "$schema": "chenu://dimension-engine/v1",
+  "version": "1.0.0",
+  "description": "Constitutional rules for dimension resolution in CHE·NU",
+  
+  "resolution": {
+    "order": ["contentVolume", "activityLevel", "userPermission", "sphereConfig"],
+    "mode": "multiplicative"
+  },
+  
+  "contentVolume": {
+    "thresholds": {
+      "low": { "max": 5, "scale": 0.6, "ui": "minimal" },
+      "medium": { "min": 5, "max": 20, "scale": 1.0, "ui": "standard" },
+      "high": { "min": 20, "scale": 1.4, "ui": "expanded" },
+      "extreme": { "min": 50, "scale": 1.8, "ui": "full" }
+    },
+    "metrics": ["itemCount", "agentCount", "activeProcesses", "pendingDecisions"]
+  },
+  
+  "activityLevel": {
+    "states": {
+      "dormant": { "animation": "none", "opacity": 0.5, "updateInterval": 60000 },
+      "idle": { "animation": "none", "opacity": 0.8, "updateInterval": 30000 },
+      "active": { "animation": "pulse", "opacity": 1.0, "updateInterval": 5000 },
+      "busy": { "animation": "orbit", "opacity": 1.0, "updateInterval": 1000 },
+      "critical": { "animation": "alert", "opacity": 1.0, "updateInterval": 500 }
+    },
+    "transitionRules": {
+      "idleAfter": 30000,
+      "dormantAfter": 300000,
+      "activeOnInteraction": true,
+      "busyThreshold": 5,
+      "criticalConditions": ["pendingApproval", "error", "deadline"]
+    }
+  },
+  
+  "userPermission": {
+    "levels": {
+      "none": { "visible": false, "interactable": false },
+      "view": { "visible": true, "interactable": false, "opacity": 0.7 },
+      "read": { "visible": true, "interactable": true, "actions": ["view", "search"] },
+      "write": { "visible": true, "interactable": true, "actions": ["view", "search", "edit", "create"] },
+      "admin": { "visible": true, "interactable": true, "actions": ["*"] }
+    },
+    "inheritance": "cascade-down"
+  },
+  
+  "shapes": {
+    "structure": {
+      "borderRadius": "sm",
+      "aspectRatio": "4:5",
+      "corners": "sharp",
+      "shadow": "hard"
+    },
+    "organic": {
+      "borderRadius": "xl",
+      "aspectRatio": "1:1",
+      "corners": "soft",
+      "shadow": "diffuse"
+    },
+    "hybrid": {
+      "borderRadius": "md",
+      "aspectRatio": "3:4",
+      "corners": "mixed",
+      "shadow": "medium"
+    }
+  },
+  
+  "growthAxes": {
+    "vertical": {
+      "primary": "y",
+      "expansion": "down",
+      "childFlow": "column",
+      "overflow": "scroll-y"
+    },
+    "horizontal": {
+      "primary": "x",
+      "expansion": "right",
+      "childFlow": "row",
+      "overflow": "scroll-x"
+    },
+    "radial": {
+      "primary": "r",
+      "expansion": "outward",
+      "childFlow": "orbital",
+      "overflow": "scale"
+    },
+    "depth": {
+      "primary": "z",
+      "expansion": "forward",
+      "childFlow": "layers",
+      "overflow": "fade"
+    }
+  },
+  
+  "animations": {
+    "none": { "keyframes": null, "duration": 0 },
+    "pulse": { 
+      "keyframes": "chenu-pulse", 
+      "duration": 2000, 
+      "easing": "ease-in-out",
+      "iterations": "infinite"
+    },
+    "breathe": { 
+      "keyframes": "chenu-breathe", 
+      "duration": 4000, 
+      "easing": "ease-in-out",
+      "iterations": "infinite"
+    },
+    "orbit": { 
+      "keyframes": "chenu-orbit", 
+      "duration": 8000, 
+      "easing": "linear",
+      "iterations": "infinite"
+    },
+    "glow": { 
+      "keyframes": "chenu-glow", 
+      "duration": 3000, 
+      "easing": "ease-in-out",
+      "iterations": "infinite"
+    },
+    "alert": { 
+      "keyframes": "chenu-alert", 
+      "duration": 500, 
+      "easing": "ease-out",
+      "iterations": "infinite"
+    }
+  },
+  
+  "transitions": {
+    "slide-down": { "transform": "translateY(-100%)", "duration": 400, "easing": "ease-out" },
+    "slide-up": { "transform": "translateY(100%)", "duration": 400, "easing": "ease-out" },
+    "expand-radial": { "transform": "scale(0)", "duration": 500, "easing": "cubic-bezier(0.34, 1.56, 0.64, 1)" },
+    "fade": { "opacity": 0, "duration": 300, "easing": "ease" },
+    "zoom": { "transform": "scale(0.8)", "opacity": 0, "duration": 350, "easing": "ease-out" }
+  },
+  
+  "depth": {
+    "maxLevels": 4,
+    "scaleFactor": 0.85,
+    "opacityFactor": 0.9,
+    "blurFactor": 1
+  }
+}
